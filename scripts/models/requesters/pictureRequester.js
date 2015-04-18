@@ -47,7 +47,8 @@ app.pictureRequster = (function () {
 
         return defer.promise;
     }
-                                //todo rename
+
+    //todo rename
     PictureRequester.prototype.uploadPicture = function (file) {
         var pictureUploadHeaders = getPictureHeaders();
         var url = this._baseURL + '/files/' + file.name;
@@ -61,6 +62,11 @@ app.pictureRequster = (function () {
         return makeRequest('GET', pictureRepoHeaders, url, null);
     };
 
+    PictureRequester.prototype.deletePicture = function (id) {
+        var url = this._baseURL + 'classes/Photo/' + id;
+        var pictureRepoHeaders = getPictureHeaders();
+        return makeRequest('DELETE', pictureRepoHeaders, url, null);
+    };
 
     PictureRequester.prototype.createPictureRepo = function (data) {
         //todo

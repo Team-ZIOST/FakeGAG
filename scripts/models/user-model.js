@@ -4,7 +4,7 @@ app.modells = (function(){
     var user = (function(){
         function User(baseUrl){
             this._baseUrl = baseUrl;
-            console.log('instance')
+            console.log('instance');
             //return 'OK'
         }
         User.prototype.userRegister = function userRegister(username, email, password, repeatPassword){

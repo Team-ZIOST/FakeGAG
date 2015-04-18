@@ -12,8 +12,8 @@ app.controller = (function(){
         var $password = $('[name="password"]').val();
         var $repPass = $('[name="repeat-password"]').val();
         var userInstance = new app.modells.user.instance('https://api.parse.com/1/');
-        console.log(userInstance._baseUrl)
-        userInstance.userRegister($name, $email, $password, $repPass);
+        console.log(userInstance._baseUrl);
+        userInstance.userRegister($name, $email, $password, $repPass)
 
         console.log($repPass);
         return false;
@@ -24,4 +24,4 @@ app.controller = (function(){
         userRegister: userRegister
 
     }
-}())
+}());

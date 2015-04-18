@@ -25,7 +25,18 @@ var app = app || {};
                 data.results.forEach(function (pictureData) {
                     console.log(pictureData.picture.url);
                     //todo get the selector form sammy
-                    $('#wrapper').append($('<img ' + 'id="' + pictureData.objectId + '" class="image" src="' + pictureData.picture.url + '">'));
+                    //todo put the delete button only for admins or users
+                    var $image = $('<img class="image" src="' + pictureData.picture.url + '">');
+                    var $removeImageButton = $('<button class="removeButton">').text("Remove");
+                    var $imageDivContainer  =  $('<div class="imageContainer">').attr('id', pictureData.objectId);
+                    $removeImageButton.click(function(){
+                       var id =$(this).parent().attr('id');
+                        picRequester.deletePicture(id);
+                        $("#"+id).remove();
+
+                    });
+                    $imageDivContainer.append($image).append($removeImageButton);
+                    $('#wrapper').append($imageDivContainer);
                 })
 
             }
