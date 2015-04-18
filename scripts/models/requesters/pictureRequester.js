@@ -6,7 +6,7 @@ app.pictureRequster = (function () {
     }
 
     function getPictureHeaders() {
-        var pictureHeaders = app.headers;
+        var pictureHeaders = app.constants.HEADERS;
         pictureHeaders['Content-Type'] = 'file.type';
 
         //todo
@@ -17,7 +17,7 @@ app.pictureRequster = (function () {
     }
 
     function getPictureRepoHeaders() {
-        var picRepoHeaders = app.headers;
+        var picRepoHeaders = app.constants.HEADERS;
         picRepoHeaders['Content-Type'] = 'application/json';
 
         //todo
@@ -49,9 +49,9 @@ app.pictureRequster = (function () {
     }
 
     PictureRequester.prototype.uploadPicture = function (file) {
-        var pictureUploadHeaders = getPictureHeaders();
-        var url = this._baseURL + '/files/' + file.name;
-        return makeRequest('POST', pictureUploadHeaders, url, file);
+            var pictureUploadHeaders = getPictureHeaders();
+            var url = this._baseURL + '/files/' + file.name;
+            return makeRequest('POST', pictureUploadHeaders, url, file);
     };
 
     PictureRequester.prototype.createPictureRepo = function (data) {

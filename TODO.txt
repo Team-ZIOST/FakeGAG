@@ -6,4 +6,4 @@
 //front  - home (all), hot,  trending (vote = today)
 
 admin panel, search bar
-MVC sammy, moustache?, noty?, jquery, lodash?, Q, owl?,require, 
+MVC sammy, moustache?, noty, jquery, lodash?, Q, owl?,require,
