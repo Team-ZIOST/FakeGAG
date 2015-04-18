@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>User Register</title>
+</head>
+<body>
+<script src="../jquery-1.11.2.min.js"></script>
+<script src="../controller/user-controller.js"></script>
+<script src="../models/user-model.js"></script>
+    <section>
+
+        <form method="post">
+            <input type="text" name="username"/>
+            <input type="text" name="email"/>
+            <input type="password" name="password"/>
+            <input type="password" name="repeat-password"/>
+            <input type="submit" value="Register" onclick="return app.controller.userRegister()"/>
+        </form>
+    </section>
+</body>
+</html>
