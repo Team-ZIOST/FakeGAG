@@ -1,0 +1,11 @@
+1. Users  roles : (admin , regular);
+2. Category : relation - pictures (ако решим че една снимка може да има повече категории) (name)  
+3.  Photos : (user, title, votes, caption, picture, [Comments]<=pointer);
+4. Comments:  (user, pointer -> photo)
+
+
+
+//front  - home (all), hot,  trending (vote = today)
+
+admin panel, search bar
+MVC sammy, moustache?, noty?, jquery, lodash?, Q, owl?,require, 
