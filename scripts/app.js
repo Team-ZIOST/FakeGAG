@@ -14,9 +14,7 @@ var $button = $('#upload').click(function () {
                         console.log(data)
                     }, function (err) {
                         console.error(err)
-                    }).done(function (data) {
-                        var i;
-                    });
+                    }).done();
             }, function (err) {
                 console.error(err)
             });
