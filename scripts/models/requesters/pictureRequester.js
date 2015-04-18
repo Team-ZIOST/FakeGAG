@@ -47,12 +47,20 @@ app.pictureRequster = (function () {
 
         return defer.promise;
     }
-
+                                //todo rename
     PictureRequester.prototype.uploadPicture = function (file) {
-            var pictureUploadHeaders = getPictureHeaders();
-            var url = this._baseURL + '/files/' + file.name;
-            return makeRequest('POST', pictureUploadHeaders, url, file);
+        var pictureUploadHeaders = getPictureHeaders();
+        var url = this._baseURL + '/files/' + file.name;
+        return makeRequest('POST', pictureUploadHeaders, url, file);
     };
+
+    PictureRequester.prototype.getPictures = function () {
+        //todo  check if this url must be here
+        var url = this._baseURL + 'classes/Photo/';
+        var pictureRepoHeaders = getPictureRepoHeaders();
+        return makeRequest('GET', pictureRepoHeaders, url, null);
+    };
+
 
     PictureRequester.prototype.createPictureRepo = function (data) {
         //todo
