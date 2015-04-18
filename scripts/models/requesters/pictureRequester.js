@@ -6,24 +6,20 @@ app.pictureRequster = (function () {
     }
 
     function getPictureHeaders() {
-        var PictureHeaders = {
-            'X-Parse-Application-ID': '2TuV4wtwFeGfuHRPMI6OQlep5kBhK9VxXwh0wQDC',
-            'X-Parse-REST-API-Key': 'fQygihlNWiKhnd63W3E4mrZTG8Kq2Z7bRlu1Ajvw',
-            'Content-Type': 'image/jpeg'
-        };
+        var pictureHeaders = app.headers;
+        pictureHeaders['Content-Type'] = 'file.type';
+
         //todo
         //if (sessionStorage['logged-in']) {
         //    headers['X-Parse-Session-Token'] = sessionStorage['logged-in'];
         //}
-        return PictureHeaders;
+        return pictureHeaders;
     }
 
     function getPictureRepoHeaders() {
-        var picRepoHeaders = {
-            'X-Parse-Application-ID': '2TuV4wtwFeGfuHRPMI6OQlep5kBhK9VxXwh0wQDC',
-            'X-Parse-REST-API-Key': 'fQygihlNWiKhnd63W3E4mrZTG8Kq2Z7bRlu1Ajvw',
-            'Content-Type': 'application/json'
-        };
+        var picRepoHeaders = app.headers;
+        picRepoHeaders['Content-Type'] = 'application/json';
+
         //todo
         //if (sessionStorage['logged-in']) {
         //    headers['X-Parse-Session-Token'] = sessionStorage['logged-in'];
@@ -52,9 +48,9 @@ app.pictureRequster = (function () {
         return defer.promise;
     }
 
-    PictureRequester.prototype.uploadPicture = function (fileName, file) {
+    PictureRequester.prototype.uploadPicture = function (file) {
         var pictureUploadHeaders = getPictureHeaders();
-        var url = this._baseURL + '/files/' + fileName;
+        var url = this._baseURL + '/files/' + file.name;
         return makeRequest('POST', pictureUploadHeaders, url, file);
     };
 
@@ -73,7 +69,7 @@ app.pictureRequster = (function () {
                 "__type": "File"
             }
         };
-        makeRequest('POST', picRepoHeaders, classURL, JSON.stringify(pictureData));
+        return makeRequest('POST', picRepoHeaders, classURL, JSON.stringify(pictureData));
     };
 
     return {

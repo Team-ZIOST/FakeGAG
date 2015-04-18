@@ -1,13 +1,15 @@
 var app = app || {};
-var BASEURL = 'https://api.parse.com/1/';
 
-var button = $('#upload').click(function () {
-    var picRequester = app.pictureRequster.load(BASEURL);
+var $button = $('#upload').click(function () {
+    var picRequester = app.pictureRequster.load(app.baseURL);
     var file = $('input')[0].files[0];
-    var fileName = file.name;
+    //todo multiple uploads
+    //todo this must be in the pictureController
+    //todo check fileName
+    //if(file.type === FILE_TYPE){
+    //    console.log('err');
 
-    //this must be in the pictureController
-    picRequester.uploadPicture(fileName, file)
+    picRequester.uploadPicture(file)
         .then(function (data) {
             picRequester.createPictureRepo(data)
                 .then(function (data) {
@@ -18,4 +20,5 @@ var button = $('#upload').click(function () {
         }, function (err) {
             console.error(err)
         });
+    //}
 });
