@@ -26,4 +26,4 @@ app.controller = (function(){
         userRegister: userRegister
 
     }
-}())
+}());

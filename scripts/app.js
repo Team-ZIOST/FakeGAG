@@ -1,50 +1,46 @@
 var app = app || {};
 
 (function () {
-    //var picRequester = app.pictureRequster.load(app.constants.BASE_URL);
 
     app.router = Sammy(function () {
         var $selector = $('#wrapper');
-
+        var pictureRepoModel = app.pictureRepoModel.load(app.constants.BASE_URL);
+        var pictureController = app.pictureController.load(pictureRepoModel);
         this.get('#/', function () {
-            var pictureRepoModel = app.pictureRepoModel.load(app.constants.BASE_URL);
-            pictureRepoModel.showAllPictures();
 
-            //todo controller
-            //$($selector).empty();
-            //console.log('home');
-            //$('#getPics').click(function () {
-            //
-            //    picRequester.getPictures()
-            //        .then(function (data) {
-            //            showPictures(data);
-            //        }, function (err) {
-            //            console.log(err)
-            //        });
-            //
-            //});
-            //
-            //
-            //var $button = $('#upload').click(function () {
-            //
-            //    var file = $('input')[0].files[0];
-            //    //todo multiple uploads
-            //    //todo this must be in the pictureController
-            //    //todo check fileName
-            //    if (app.constants.SUPPORTED_FORMATS.indexOf(file.type) !== -1) {
-            //        picRequester.uploadPicture(file)
-            //            .then(function (data) {
-            //                picRequester.createPictureRepo(data)
-            //                    .then(function (data) {
-            //                        console.log(data)
-            //                    }, function (err) {
-            //                        console.error(err)
-            //                    }).done();
-            //            }, function (err) {
-            //                console.error(err)
-            //            });
-            //    }
-            //});
+            pictureController.renderAllPictures($selector);
+        });
+
+        this.get('#/upload', function () {
+            $($selector).empty();
+            //todo - attach to controller
+
+            $.get('templates/upload-template.html', function (template) {
+                var output = Mustache.render(template);
+                $($selector).html(output);
+
+                var $button = $('#upload').click(function () {
+                    var file = $('input')[0].files[0];
+                    //todo multiple uploads
+                    //todo this must be in the pictureController
+                    //todo check fileName
+                    var picRequester = app.pictureRequster.load(app.constants.BASE_URL);
+
+                    if (app.constants.SUPPORTED_FORMATS.indexOf(file.type) !== -1) {
+                        picRequester.uploadPicture(file)
+                            .then(function (data) {
+                                picRequester.createPictureRepo(data)
+                                    .then(function (data) {
+                                        console.log(data)
+                                    }, function (err) {
+                                        console.error(err)
+                                    }).done();
+                            }, function (err) {
+                                console.error(err)
+                            });
+                    }
+                });
+            });
         });
 
         this.get('#/hot', function () {
@@ -62,7 +58,29 @@ var app = app || {};
         this.get('#/signup-login', function () {
             //todo controller
             $($selector).empty();
-            console.log('login');
+            if (!sessionStorage['sessionToken']) {
+
+                $.get('templates/user-view-register.html', function (template) {
+                    var output = Mustache.render(template);
+                    $($selector).html(output);
+                });
+                $.get('templates/user-vew-login.html', function (template) {
+                    var output = Mustache.render(template);
+                    $($selector).append(output);
+
+                });
+            } else {
+                $($selector).empty();
+                //todo remove the logOutButton form here :)
+                var $logOutButton = $('<button id="logOutButton">').text('Log-out');
+                $logOutButton.click(function () {
+                    sessionStorage.clear();
+
+                    //render the forms again
+                });
+                $($selector.append($logOutButton))
+            }
+
         });
     });
 
