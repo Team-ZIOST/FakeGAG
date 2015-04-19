@@ -116,11 +116,10 @@ app.modells = (function () {
             });
             return false;
         }
-
+        app.parseComQuery = parseComQuery;
         return {
             userRegister: userRegister,
-            userLogin: userLogin,
-            parseComQuery: parseComQuery
+            userLogin: userLogin
         }
     }());
     return {
