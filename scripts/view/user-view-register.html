@@ -12,11 +12,19 @@
 
         <form method="post">
             <input type="text" name="username"/>
+            <span id="username" class="error"></span>
+
             <input type="text" name="email"/>
+            <span id="email" class="error"></span>
+
             <input type="password" name="password"/>
+            <span id="password" class="error"></span>
+
             <input type="password" name="repeat-password"/>
-            <input type="submit" value="Register" onclick="return app.controller.userRegister()"/>
+            <span id="repeat-password" class="error"></span>
+            <input type="submit" value="Register" disabled onclick="return app.controller.userRegister()"/>
         </form>
+
     </section>
 </body>
 </html>

@@ -2,7 +2,9 @@ var app = app || {};
 
 app.controller = (function(){
     function userLogin(){
-        console.log('login user');
+        var $username = $('[name="username"]').val();
+        var $password = $('[name="password"]').val();
+        app.modells.user.userLogin($username, $password);
         return false;
     }
     function userRegister(){
@@ -11,9 +13,9 @@ app.controller = (function(){
         var $email = $('[name="email"]').val();
         var $password = $('[name="password"]').val();
         var $repPass = $('[name="repeat-password"]').val();
-        var userInstance = new app.modells.user.instance('https://api.parse.com/1/');
-        console.log(userInstance._baseUrl);
-        userInstance.userRegister($name, $email, $password, $repPass)
+
+
+        app.modells.user.userRegister($name, $email, $password, $repPass);
 
         console.log($repPass);
         return false;
@@ -24,4 +26,4 @@ app.controller = (function(){
         userRegister: userRegister
 
     }
-}());
+}())
