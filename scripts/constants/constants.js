@@ -16,6 +16,3 @@ app.constants = (function () {
         SUPPORTED_FORMATS: supportedFormats
     }
 })();
-
-
-//todo check file extentions

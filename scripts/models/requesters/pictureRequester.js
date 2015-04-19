@@ -62,6 +62,12 @@ app.pictureRequster = (function () {
         return makeRequest('GET', pictureRepoHeaders, url, null);
     };
 
+    PictureRequester.prototype.getTopTenPictures = function () {
+        var url = this._baseURL + 'classes/Photo?order=-votes&limit=10';
+        var pictureRepoHeaders = getPictureRepoHeaders();
+        return makeRequest('GET', pictureRepoHeaders, url, null);
+    };
+
     PictureRequester.prototype.deletePicture = function (id) {
         var url = this._baseURL + 'classes/Photo/' + id;
         var pictureRepoHeaders = getPictureHeaders();
