@@ -10,12 +10,12 @@
 <body>
 <div id="navbar">
 	<nav class="container">
-		<ul class="nav navbar-nav">
+		<ul id='mainNav'class="nav navbar-nav">
 			<li><a href="#/"><i class="pe-7s-home"></i><span class="menuspan">Home</span></a></li>
 			<li><a href="#/hot"><i class="pe-7s-like2"></i><span class="menuspan">Hot</span></a></li>
 			<li><a href="#/top-ten"><i class="pe-7s-graph2"></i><span class="menuspan">Top Ten</span></a></li>
 			<li><a href="#/signup-login"><i class="pe-7s-user"></i><span class="menuspan">Sign up/Login</span></a></li>
-			<li><a href="#/upload"><i class="pe-7s-cloud-upload"></i><span class="menuspan">Upload a picture</span></a></li>
+			<!--<li><a href="#/upload"><i class="pe-7s-cloud-upload"></i><span class="menuspan">Upload a picture</span></a></li>-->
 		</ul>
 	</nav>
 </div>
@@ -33,13 +33,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.js"></script>
 <script src="scripts/controller/user-controller.js"></script>
 <script src="scripts/models/user-model.js"></script>
-<!--<script src="scripts/controller/user-controller.js"></script>-->
-<!--<script src="scripts/models/user-model.js"></script>-->
-
 
 
 <script src="scripts/constants/constants.js"></script>
 <script src="scripts/controller/pictures-controller.js"></script>
+<script src="scripts/models/comment-model.js"></script>
+<script src="scripts/view/commentView.js"></script>
+<script src="scripts/controller/comment-controller.js"></script>
 
 <script src="scripts/models/requesters/pictureRequester.js"></script>
 <script src="scripts/models/pictureModel.js"></script>

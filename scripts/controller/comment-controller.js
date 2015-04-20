@@ -1,26 +1,27 @@
 var app = app || {};
 
 app.controller.comment = (function(){
-    $(document).ready(function(){
-        $('#add-comment').click(setComment);
-        $('#get-comment').click(getComment);
-        $('#delete-comment').click(deleteComment);
+    //$(document).ready(function(){
+    //    $('#add-comment').click(setComment);
+    //    $('#get-comment').click(getComment);
+    //    $('#delete-comment').click(deleteComment);
+    //
+    //});
 
-    })
-
-    function setComment(){
-        var $comment = $('#comment').val();
-        app.modells.comment.setComment($comment);
+    function setComment(selecotor, id){
+        var $comment = $(selecotor).val();
+        app.modells.comment.setComment($comment, id);
 
     }
-    function getComment(){
-        app.modells.comment.getComment();
+    function getComment(id, selector){
+        app.modells.comment.getComment(id, selector);
     }
-    function deleteComment(){
-        var id = '5RC60qgsEr';
+    function deleteComment(id){
+        var id = id;
         app.modells.comment.deleteComment(id);
     }
     return {
-        setComment: setComment
+        setComment: setComment,
+        getComment: getComment
     }
-}())
+}());

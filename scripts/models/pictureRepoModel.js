@@ -20,7 +20,8 @@ app.pictureRepoModel = (function () {
                     var pictureUrl = pictureData.picture.url;
                     //todo this fields
                     var category = 'none';
-                    var owner = 'owner';
+                    //pointer owner
+                    var owner = sessionStorage['userId'];
                     var objectId = pictureData.objectId;
                     var votes = pictureData.votes;
                     var picture = new Picture(objectId, title, caption, pictureUrl, votes, category, owner);

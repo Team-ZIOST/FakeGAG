@@ -6,10 +6,19 @@ var app = app || {};
         var $selector = $('#wrapper');
         var pictureRepoModel = app.pictureRepoModel.load(app.constants.BASE_URL);
         var pictureController = app.pictureController.load(pictureRepoModel);
+
+
+        if(sessionStorage['userId']){
+            $('#mainNav').append($('<li id="uploadSection"><a href="#/upload"><i class="pe-7s-cloud-upload"></i><span class="menuspan">Upload a picture</span></a></li>'));
+
+        }
+
         this.get('#/', function () {
 			app.setActiveLink('');
             pictureController.renderAllPictures($selector);
         });
+
+
 
         this.get('#/upload', function () {
 			app.setActiveLink('upload');
@@ -79,7 +88,7 @@ var app = app || {};
                 var $logOutButton = $('<button id="logOutButton">').text('Log-out');
                 $logOutButton.click(function () {
                     sessionStorage.clear();
-
+                    $('#uploadSection').remove();
                     //render the forms again
                 });
                 $($selector.append($logOutButton))

@@ -104,7 +104,12 @@ app.modells = (function () {
         function userLogin(username, password) {
             parseComQuery('get', {}, 'https://api.parse.com/1/login?username=' + username + '&password=' + password).success(function (d) {
                 sessionStorage['sessionToken'] = d.sessionToken;
-                console.log('success')
+                sessionStorage['userId'] = d.objectId;
+                if(  $( "#uploadSection" ).length===0 ) {
+                    $('#mainNav').append($('<li id="uploadSection"><a href="#/upload"><i class="pe-7s-cloud-upload"></i><span class="menuspan">Upload a picture</span></a></li>').hide());
+                    $('#uploadSection').fadeIn(500);
+                    console.log('success');
+                }
             }).error(function (e) {
                 //var json = JSON.parse(e.ma)
                 e.responseJSON.code == 101 ? console.log('invalid username or password') : ''

@@ -87,6 +87,12 @@ app.pictureRequster = (function () {
             picture: {
                 "name": pictureName,
                 "__type": "File"
+            },
+
+            owner: {
+                "__type": "Pointer",
+                "className": "_User",
+                "objectId": sessionStorage['userId']
             }
         };
         return makeRequest('POST', picRepoHeaders, classURL, JSON.stringify(pictureData));
