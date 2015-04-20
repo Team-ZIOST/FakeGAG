@@ -81,11 +81,6 @@ app.modells = (function () {
                             {
                                 "__type": "Pointer",
                                 "className": "_User",
-                                "objectId": "8TOXdXf3tz"
-                            },
-                            {
-                                "__type": "Pointer",
-                                "className": "_User",
                                 "objectId": d.objectId
                             }
                         ]
