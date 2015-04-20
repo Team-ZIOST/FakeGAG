@@ -4,6 +4,7 @@ app.controller.comment = (function(){
     $(document).ready(function(){
         $('#add-comment').click(setComment);
         $('#get-comment').click(getComment);
+        $('#delete-comment').click(deleteComment);
 
     })
 
@@ -13,9 +14,11 @@ app.controller.comment = (function(){
 
     }
     function getComment(){
-
         app.modells.comment.getComment();
-
+    }
+    function deleteComment(){
+        var id = '5RC60qgsEr';
+        app.modells.comment.deleteComment(id);
     }
     return {
         setComment: setComment

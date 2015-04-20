@@ -33,8 +33,16 @@ app.modells.comment = (function(){
             console.log('error')
         })
     }
+    function deleteComment(id){
+        app.parseComQuery('delete', {}, 'https://api.parse.com/1/classes/Comment/' + id).success(function() {
+            console.log('success')
+        }).error(function(data){
+            console.log(data);
+        });
+    }
     return {
         setComment: setComment,
-        getComment: getComment
+        getComment: getComment,
+        deleteComment: deleteComment
     }
 }())
