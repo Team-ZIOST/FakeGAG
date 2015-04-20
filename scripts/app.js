@@ -7,11 +7,12 @@ var app = app || {};
         var pictureRepoModel = app.pictureRepoModel.load(app.constants.BASE_URL);
         var pictureController = app.pictureController.load(pictureRepoModel);
         this.get('#/', function () {
-
+			app.setActiveLink('');
             pictureController.renderAllPictures($selector);
         });
 
         this.get('#/upload', function () {
+			app.setActiveLink('upload');
             $($selector).empty();
             //todo - attach to controller
 
@@ -44,18 +45,21 @@ var app = app || {};
         });
 
         this.get('#/hot', function () {
+			app.setActiveLink('hot');
             $($selector).empty();
             //todo controller
             console.log('hot');
         });
 
         this.get('#/top-ten', function () {
+			app.setActiveLink('top-ten');
             //todo controller
             $($selector).empty();
             console.log('top 10');
         });
 
         this.get('#/signup-login', function () {
+			app.setActiveLink('signup-login');
             //todo controller
             $($selector).empty();
             if (!sessionStorage['sessionToken']) {
