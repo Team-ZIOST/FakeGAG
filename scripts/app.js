@@ -83,7 +83,11 @@ var app = app || {};
                     var output = Mustache.render(template);
                     $($selector).html(output);
                     $('#loginButton').click(function(){
-                        app.controller.userLogin()
+                        app.controller.userLogin((function (data) {
+
+                            app.modells.user.userRole(sessionStorage['userId']);
+
+                        }));
                     });
 
                     $('#register').click(function () {
@@ -155,6 +159,7 @@ var app = app || {};
                 //todo remove the logOutButton form here :)
                 var $logOutButton = $('<button id="logOutButton">').text('Log-out');
                 $logOutButton.click(function () {
+                    app.modells.user.userLogout();
                     sessionStorage.clear();
                     $('#uploadSection').remove();
                     //render the forms again

@@ -16,15 +16,6 @@ app.picturesView = (function () {
             var $addCommentButton = $('<button id="add-comment">').text('Add Commment');
             var $getCommentButton = $('<button id="get-comment">').text('Show Comments');
 
-
-                //.success(function (data) {
-                //    console.log(data)
-                //});
-                //.success(function (commentData) {
-                //
-                //
-                //}, function(err){console.log(err)});
-
             $removeImageButton.click(function () {
                 var id = $(this).parent().attr('id');
 

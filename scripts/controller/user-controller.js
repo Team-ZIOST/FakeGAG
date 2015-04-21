@@ -1,11 +1,11 @@
 var app = app || {};
 
 app.controller = (function(){
-    function userLogin(){
+    function userLogin(kur){
+
         var $username = $('[name="username"]').val();
         var $password = $('[name="password"]').val();
-        app.modells.user.userLogin($username, $password);
-        return false;
+         return  app.modells.user.userLogin($username, $password, kur);
     }
     function userRegister(){
         console.log('register');
