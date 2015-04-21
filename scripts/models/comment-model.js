@@ -41,6 +41,7 @@ app.modells.comment = (function () {
             }, function(err){
                 console.log(err);
             });
+
     }
 
     return {
