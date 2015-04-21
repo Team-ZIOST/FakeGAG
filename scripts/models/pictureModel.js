@@ -9,6 +9,6 @@ var Picture = (function () {
         this._pictureURL = url;
     }
 
-    return Picture
-
+    return Picture;
+//picture Binding Model
 }());

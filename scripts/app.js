@@ -80,6 +80,56 @@ var app = app || {};
                 $.get('templates/user-vew-login.html', function (template) {
                     var output = Mustache.render(template);
                     $($selector).append(output);
+                    function checkingInputData(data, regex, id, errorMsg, input) {
+                        var m = data.match(regex)
+
+                        if (m === null || m[0] !== data || m === '') {
+                            $(id).text(errorMsg);
+                            $('input[type="submit"]').prop('disabled', true);
+
+
+                        }
+                        else {
+                            $(id).html('&#10004;');
+                            $('input[type="submit"]').prop('disabled', false);
+                            inputsHasValue.length === 4 ? $('input[type="submit"]').prop('disabled', false) : '';
+                        }
+                    }
+
+                    var inputsHasValue = {};
+                    var repeatPasswordRegex = '';
+                    var passwordRegex = /[\S+\s+]{8,100}$/;
+                    var usernameRegex = /[A-z_\-0-9]{3,35}$/;
+                    var emailRegex = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
+                    $("input").keyup(function () {
+                        var name = this.name;
+
+                        switch (name) {
+                            case "username":
+                                var $username = $('[name="username"]').val();
+                                checkingInputData($username, usernameRegex, '#username', 'username is invalid');
+                                inputsHasValue['username'] = true;
+                                break;
+                            case "password":
+                                var $password = $('[name="password"]').val();
+                                checkingInputData($password, passwordRegex, '#password', 'invalid password');
+                                repeatPasswordRegex = $password;
+                                inputsHasValue['password'] = true;
+                                break;
+                            case "email":
+                                var $email = $('[name="email"]').val();
+                                checkingInputData($email, emailRegex, '#email', 'email is invalid');
+                                inputsHasValue['email'] = true;
+                                break;
+                            case "repeat-password":
+                                var $repeatPass = $('[name="repeat-password"]').val();
+                                checkingInputData($repeatPass, repeatPasswordRegex, '#repeat-password', 'invalid password');
+                                inputsHasValue['repeat-pass'] = true;
+                                break;
+                            default:
+                                console.log('unknown case');
+                        }
+                    });
 
                 });
             } else {
