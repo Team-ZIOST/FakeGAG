@@ -77,29 +77,44 @@ app.modells = (function () {
             var url = app.constants.BASE_URL + 'users';
             console.log(headers)
 
-          app.baseRequest.makeRequest('post',  headers, url, JSON.stringify(data)).then(function(d){
-              var dataRole = {
-                  "users": {
-                      "__op": "AddRelation",
-                      "objects": [
-                          {
-                              "__type": "Pointer",
-                              "className": "_User",
-                              "objectId": d.objectId
-                          }
-                      ]
-                  }
-              };
-              url = app.constants.BASE_URL + 'roles/LGlTwmEecV';
-              app.baseRequest.makeRequest('put',  headers, url, JSON.stringify(dataRole)).then(function(d) {
-                  console.log('success');
-              })
-          }, function(){
-              console.log('error');
-          })
+            app.baseRequest.makeRequest('post', headers, url, JSON.stringify(data)).then(function (d) {
+                var dataRole = {
+                    "users": {
+                        "__op": "AddRelation",
+                        "objects": [
+                            {
+                                "__type": "Pointer",
+                                "className": "_User",
+                                "objectId": d.objectId
+                            }
+                        ]
+                    }
+                };
+                url = app.constants.BASE_URL + 'roles/LGlTwmEecV';
+                app.baseRequest.makeRequest('put', headers, url, JSON.stringify(dataRole)).then(function (d) {
+                    console.log('success');
+                })
+            }, function () {
+                console.log('error');
+            });
             console.log('reg')
             return false;
         }
+
+
+        function userLogOut() {
+            var url = app.constants.BASE_URL + 'logout';
+            // https://api.parse.com/1/logout
+            var headers = app.constants.HEADERS;
+            headers['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
+            app.baseRequest.makeRequest('POST', headers, url, {})
+                .then(function (data) {
+                    console.log(data);
+                }, function (err) {
+                    console.log(err)
+                });
+
+            }
 
         function userLogin(username, password) {
             var url = app.constants.BASE_URL + 'login/?username='+username+'&password='+ password
@@ -115,16 +130,50 @@ app.modells = (function () {
                 console.log('err');
             });
 
+
+        }
+
+        function takeUserRole(id) {
+            console.log('id is ' + id);
+            var url = app.constants.BASE_URL + 'roles/' + '?where={"users":{"__type":"Pointer","className":"_User","objectId":"' + id + '"}}';
+            app.baseRequest.makeRequest('GET', app.constants.HEADERS, url)
+                .then(function (data) {
+                    sessionStorage['userType'] = data.results[0]['name'];
+                    console.log(err)
+                })
+        }
+
+        function userLogin(username, password, callbackPromise) {
+            var defer = Q.defer();
+            var url = app.constants.BASE_URL + 'login/?username=' + username + '&password=' + password;
+            app.baseRequest.makeRequest('get', app.constants.HEADERS, url, {})
+                .then(function (d) {
+                    sessionStorage['sessionToken'] = d.sessionToken;
+                    console.log(d);
+                    sessionStorage['userId'] = d.objectId;
+                    if ($("#uploadSection").length === 0) {
+                        $('#mainNav').append($('<li id="uploadSection"><a href="#/upload"><i class="pe-7s-cloud-upload"></i><span class="menuspan">Upload a picture</span></a></li>').hide());
+                        $('#uploadSection').fadeIn(500);
+                        console.log('success');
+                    };
+                    callbackPromise();
+
+                }, function () {
+                    console.log('err');
+                });
+
             return false;
         }
 
         return {
             userRegister: userRegister,
-            userLogin: userLogin
+            userLogin: userLogin,
+            userLogout: userLogOut,
+            userRole: takeUserRole
         }
     }());
     return {
         user: user
     };
 
-}() );
+}());
