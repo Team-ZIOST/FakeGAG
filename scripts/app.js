@@ -61,8 +61,8 @@ var app = app || {};
 
         this.get('#/top-ten', function () {
             app.setActiveLink('top-ten');
-            //todo controller
             $($selector).empty();
+            pictureController.renderTopTenPictures($selector);
             console.log('top 10');
         });
 
@@ -70,6 +70,7 @@ var app = app || {};
             app.setActiveLink('cats');
             //todo controller
             $($selector).empty();
+            pictureController.renderPicturesByCategory($selector, 'cats');
             console.log('cats');
         });
 
