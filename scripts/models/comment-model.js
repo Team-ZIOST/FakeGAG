@@ -35,11 +35,12 @@ app.modells.comment = (function () {
         });
     }
     function deleteComment(id) {
-        app.parseComQuery('delete', {}, 'https://api.parse.com/1/classes/Comment/' + id).success(function () {
-            console.log('success')
-        }).error(function (data) {
-            console.log(data);
-        });
+        var url = app.constants.BASE_URL  + 'classes/Comment/' + id;
+            app.baseRequest.makeRequest('delete',  app.constants.HEADERS, url, {}).then(function(){
+                console.log('success');
+            }, function(err){
+                console.log(err);
+            });
     }
 
     return {
