@@ -66,13 +66,38 @@ app.pictureRepoModel = (function () {
 
     };
 
+    PictureRepoModel.prototype.showPicturesByCategory = function (category) {
+        this.pictureRepo.length = 0;
+        var _this = this;
+        var defer = Q.defer();
+        this._requester.getPicturesByCategory(category)
+            .then(function (data) {
+
+                data.results.forEach(function (pictureData) {
+                    var title = pictureData.title;
+                    var caption = pictureData.caption;
+                    var pictureUrl = pictureData.picture.url;
+                    //todo this fields
+                    var category = 'none';
+                    var owner = 'owner';
+                    var objectId = pictureData.objectId;
+                    var votes = pictureData.votes;
+                    var picture = new Picture(objectId, title, caption, pictureUrl, votes, category, owner);
+                    console.log(picture);
+                    _this.pictureRepo.push(picture);
+                });
+                defer.resolve(_this.pictureRepo);
+            }, function (error) {
+                defer.reject(error)
+            });
+
+        return defer.promise;
+    };
 
     return {
         load: function (baseURL) {
             return new PictureRepoModel(baseURL);
         }
     }
-
-
 }());
 

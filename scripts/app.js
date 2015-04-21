@@ -66,6 +66,13 @@ var app = app || {};
             console.log('top 10');
         });
 
+        this.get('#/cats', function () {
+            app.setActiveLink('cats');
+            //todo controller
+            $($selector).empty();
+            console.log('cats');
+        });
+
         this.get('#/signup-login', function () {
             app.setActiveLink('signup-login');
             //todo controller

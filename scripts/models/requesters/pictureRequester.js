@@ -65,6 +65,14 @@ app.pictureRequster = (function () {
     PictureRequester.prototype.getTopTenPictures = function () {
         var url = this._baseURL + 'classes/Photo?order=-votes&limit=10';
         var pictureRepoHeaders = getPictureRepoHeaders();
+
+        return makeRequest('GET', pictureRepoHeaders, url, null);
+    };
+
+    PictureRequester.prototype.getPicturesByCategory = function (category) {
+        var url = this._baseURL + 'classes/Photo?where={"category":{"$select":{"query":{"className":"Category","where":{"name":"' + category + '"}},"key":"objectId"}}}';
+        var pictureRepoHeaders = getPictureRepoHeaders();
+
         return makeRequest('GET', pictureRepoHeaders, url, null);
     };
 

@@ -103,7 +103,7 @@ app.modells = (function () {
 
         function userLogin(username, password) {
             var url = app.constants.BASE_URL + 'login/?username='+username+'&password='+ password
-            app.baseRequest.makeRequest('get',  app.constants.HEADERS, url, {}).then(function(){
+            app.baseRequest.makeRequest('get',  app.constants.HEADERS, url, {}).then(function(d){
                 sessionStorage['sessionToken'] = d.sessionToken;
                 sessionStorage['userId'] = d.objectId;
                 if(  $( "#uploadSection" ).length===0 ) {
