@@ -6,7 +6,7 @@ app.picturesView = (function () {
         this._requester = app.pictureRequster.load(app.constants.BASE_URL);
         var _this = this;
         data.forEach(function (pictureData) {
-            console.log(pictureData)
+            console.log(pictureData);
             ////todo get the selector form sammy
             ////todo put the delete button only for admins or users
             var $image = $('<img class="image" src="' + pictureData._pictureURL + '">');
@@ -26,7 +26,7 @@ app.picturesView = (function () {
             $addCommentButton.click(function () {
                 var id = $(this).parent().attr('id');
                 console.log('sad');
-                app.controller.comment.setComment($commentTextArea, id);
+                app.commentController.setComment($commentTextArea, id);
 
             });
 
@@ -38,7 +38,7 @@ app.picturesView = (function () {
                     .append($addCommentButton)
                     .append($getCommentButton);
             }
-            app.controller.comment.getComment(pictureData._objectId, $imageDivContainer);
+            app.commentController.getComment(pictureData._objectId, $imageDivContainer);
 
             $(selector).append($imageDivContainer);
 

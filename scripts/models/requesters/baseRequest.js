@@ -3,8 +3,7 @@ var app = app || {};
 app.baseRequest = (function () {
     function makeRequest(method, headers, url, data) {
         var defer = Q.defer();
-
-        $.ajax({
+            $.ajax({
             method: method,
             headers: headers,
             url: url,
@@ -44,7 +43,7 @@ app.baseRequest = (function () {
     }
 
     function getUsersHeaders(){
-        var usersQueryHeaders = app.constants.HEADERS;
+       return  app.constants.HEADERS;
     }
 
 

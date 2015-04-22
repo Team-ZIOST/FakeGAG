@@ -1,29 +1,55 @@
 var app = app || {};
 
-app.controller = (function(){
-    function userLogin(kur){
+app.userController = (function () {
 
-        var $username = $('[name="username"]').val();
-        var $password = $('[name="password"]').val();
-         return  app.modells.user.userLogin($username, $password, kur);
+    function UserController(model) {
+        this._model = model;
     }
-    function userRegister(){
-        console.log('register');
-        var $name = $('[name="username"]').val();
-        var $email = $('[name="email"]').val();
-        var $password = $('[name="password"]').val();
-        var $repPass = $('[name="repeat-password"]').val();
 
+    UserController.prototype.renderLogin = function ($selector) {
+        app.registerLoginView.loginRegisterView($selector, this);
 
-        app.modells.user.userRegister($name, $email, $password, $repPass);
+    };
 
-        console.log($repPass);
-        return false;
+    UserController.prototype.renderLogout = function ($selector) {
+        app.registerLoginView.loadLogOutView($selector, this);
+    };
 
-    }
+    UserController.prototype.loginUser = function (username, password) {
+        this._model.login(username, password)
+            .then(function (data) {
+                console.log('sucsess ' + data);
+                //todo render to do view
+            }, function (error) {
+                console.log(error.responseText)
+            });
+    };
+
+    UserController.prototype.registerUser = function (username, email, password) {
+        this._model.register(username, email, password)
+            .then(function (data) {
+                console.log(data);
+                //todo DOM manipulation
+            }, function (error) {
+                console.log(error.responseText)
+            });
+    };
+
+    UserController.prototype.logoutUser = function () {
+        this._model.logout()
+            .then(function (data) {
+                sessionStorage.clear();
+                //todo dom manipulations
+                console.log('log out successful');
+            }, function (error) {
+                console.log(error.responseText);
+            });
+    };
+
     return {
-        userLogin: userLogin,
-        userRegister: userRegister
-
+        load: function (model) {
+            return new UserController(model)
+        }
     }
+
 }());
