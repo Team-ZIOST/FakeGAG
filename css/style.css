@@ -190,3 +190,35 @@ i {
 .btn-register:focus {
     color: #fff;
 }
+
+@media all and (max-width: 1200px) {
+	#navbar .container {
+		width: 600px;
+	}
+}
+
+@media all and (max-width: 770px) {
+	#navbar .container ul li {
+		float: left;
+	}
+	.navbar-nav {
+	  margin: 0 0;
+	}
+}
+@media all and (max-width: 600px) {
+	#navbar .container ul li {
+		float: left;
+	}
+	#navbar .container {
+		width: 500px;
+	}
+	.nav {
+		padding-left: 40px;
+	}
+}
+
+@media all and (max-width: 480px) {
+	.nav {
+		padding-left: 10px;
+	}
+}
