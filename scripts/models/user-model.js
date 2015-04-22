@@ -97,6 +97,7 @@ app.userModel = (function () {
         var url = app.constants.BASE_URL + 'roles/' + '?where={"users":{"__type":"Pointer","className":"_User","objectId":"' + id + '"}}';
         app.baseRequest.makeRequest('GET', app.constants.HEADERS, url)
             .then(function (data) {
+                console.log('taking user role...')
                 sessionStorage['userType'] = data.results[0]['name'];
                 defer.resolve(sessionStorage['userType']);
 

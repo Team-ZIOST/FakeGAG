@@ -16,9 +16,16 @@ app.userController = (function () {
     };
 
     UserController.prototype.loginUser = function (username, password) {
+        var _this = this;
         this._model.login(username, password)
             .then(function (data) {
-                console.log('sucsess ' + data);
+                console.log(data.objectId)
+                _this._model.takeUserRole(data.objectId)
+                    .then(function(){
+                        console.log('login complete');
+                    }, function(error){
+                        console.log(error.responseText);
+                    })
                 //todo render to do view
             }, function (error) {
                 console.log(error.responseText)
@@ -39,6 +46,7 @@ app.userController = (function () {
         this._model.logout()
             .then(function (data) {
                 sessionStorage.clear();
+
                 //todo dom manipulations
                 console.log('log out successful');
             }, function (error) {
