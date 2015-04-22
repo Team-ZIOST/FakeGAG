@@ -7,18 +7,15 @@ body {
 }
 
 #navbar {
-    margin: 0px 0 20px 0;
-    /*background: rgba(255,255,255,0.4);*/
+    margin: 0 0 20px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 #navbar .container ul li {
     text-align: center;
     color: white;
-    width: 228px;
+    width: 190px;
     cursor: pointer;
-    /*border-top: 1px solid rgba(0,0,0,0.1);*/
-    /*border-bottom: 1px solid rgba(0,0,0,0.1);*/
 }
 
 #navbar .container ul li::before {
@@ -32,37 +29,60 @@ body {
     content: '';
 }
 
-#navbar .container ul li:last-child a {
-    border: none;
+.nav > li:focus {
+    outline: none;
 }
+
 
 .nav > li > a {
     color: #2CC185;
     text-decoration: none;
     outline: none;
-    /*border-right: 1px solid #2CC185;*/
     font-weight: bold;
     padding: 25px 0;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .nav > li > a:hover {
-    background-color: #e7ecea;
-    /*color: #74777b;*/
+    background-color: transparent;
     color: white;
 }
 
 .nav > li > a:focus {
-    background-color: #e7ecea;
+    background-color: transparent;
 }
 
-.nav > li:focus {
-    outline: none;
+#navbar .container ul li:last-child a {
+    border: none;
 }
 
 .active a {
-    background: #2CC185 !important;
-    -webkit-transition: background 1s;
     color: white !important;
+}
+
+.active a::after {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+a::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: calc(100% + 1px);
+    border: 1px solid #2CC185;
+    background: #2CC185;
+    content: '';
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
 }
 
 i {
@@ -77,4 +97,96 @@ i {
 
 #register {
     cursor: pointer;
+}
+
+/*login and register forms style*/
+.panel-login {
+    border-color: #ccc;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.panel-login > .panel-heading {
+    color: #00415d;
+    background-color: #fff;
+    border-color: #fff;
+    text-align: center;
+}
+
+.panel-login > .panel-heading a {
+    text-decoration: none;
+    color: #666;
+    font-weight: bold;
+    font-size: 15px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+
+.panel-login > .panel-heading a.active {
+    color: #2CC185;
+}
+
+.panel-login > .panel-heading hr {
+    margin-top: 10px;
+    margin-bottom: 0;
+    clear: both;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+}
+
+.panel-login input[type="text"], .panel-login input[type="email"], .panel-login input[type="password"] {
+    height: 45px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+
+.panel-login input:hover,
+.panel-login input:focus {
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: #ccc;
+}
+
+.btn-login {
+    background-color: #2CC185;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    height: auto;
+    font-weight: bold;
+    padding: 14px 0;
+    text-transform: uppercase;
+}
+
+.btn-login:hover,
+.btn-login:focus {
+    color: #fff;
+}
+
+.btn-register {
+    background-color: #2CC185;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    height: auto;
+    font-weight: bold;
+    padding: 14px 0;
+    text-transform: uppercase;
+    border-color: #1CB94A;
+}
+
+.btn-register:hover,
+.btn-register:focus {
+    color: #fff;
 }

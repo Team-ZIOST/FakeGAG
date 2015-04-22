@@ -4,7 +4,7 @@ app.registerLoginView = (function () {
     //login-register - fixed
     function loadRegisterLoginPage($selector, model) {
         $($selector).empty();
-        $.get('templates/user-view-register.html', function (template) {
+        $.get('templates/user-login-register-template.html', function (template) {
             var output = Mustache.render(template);
             $($selector).html(output);
             $('#loginButton').click(function () {
