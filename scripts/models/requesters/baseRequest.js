@@ -21,7 +21,7 @@ app.baseRequest = (function () {
     }
 
     function getPictureHeaders() {
-        var pictureHeaders = app.constants.HEADERS;
+        var pictureHeaders = $.extend({}, app.constants.HEADERS);
         pictureHeaders['Content-Type'] = 'file.type';
 
         //todo
@@ -32,7 +32,7 @@ app.baseRequest = (function () {
     }
 
     function getPictureRepoHeaders() {
-        var picRepoHeaders = app.constants.HEADERS;
+        var picRepoHeaders = $.extend({}, app.constants.HEADERS);
         picRepoHeaders['Content-Type'] = 'application/json';
 
         //todo
@@ -43,7 +43,7 @@ app.baseRequest = (function () {
     }
 
     function getUsersHeaders(){
-        var headers = app.constants.HEADERS;
+        var headers = $.extend({}, app.constants.HEADERS);
         headers['Content-Type'] = 'application/json';
 
         if (sessionStorage['sessionToken']) {
@@ -65,8 +65,5 @@ app.baseRequest = (function () {
         getUserHeaders :function(){
             return getUsersHeaders()
         }
-
     }
-
-
 }());

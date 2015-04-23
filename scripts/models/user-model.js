@@ -59,33 +59,29 @@ app.userModel = (function () {
     };
 
     User.prototype.logout = function () {
-        var url = app.constants.BASE_URL + 'logout';
-        var headers = app.constants.HEADERS;
         var defer = Q.defer();
-        headers['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
-        app.baseRequest.makeRequest('POST', headers, url)
+
+        this._requester.userLogout()
             .then(function (data) {
-                sessionStorage.clear();
-                defer.resolve(data);
-            }, function (err) {
-                defer.reject(err);
-            });
+            sessionStorage.clear();
+            defer.resolve(data);
+        }, function (err) {
+            defer.reject(err);
+        });
 
         return defer.promise;
     };
 
     User.prototype.login = function (username, password) {
         var defer = Q.defer();
-        var url = app.constants.BASE_URL + 'login/?username=' + username + '&password=' + password;
-        app.baseRequest.makeRequest('get', app.constants.HEADERS, url, null)
-            .then(function (userData) {
-                sessionStorage['sessionToken'] = userData.sessionToken;
-                sessionStorage['userId'] = userData.objectId;
-                defer.resolve(userData)
-            }, function (error) {
-                defer.reject(error);
-                console.log(error.responseText);
-            });
+
+        this._requester.userLogin(username, password)
+            .then(function(data){
+            defer.resolve(data);
+        }, function(error){
+            defer.reject(error);
+            console.log(error.responseText)
+        });
 
         return defer.promise;
     };
@@ -93,7 +89,9 @@ app.userModel = (function () {
     User.prototype.takeUserRole = function takeUserRole(id) {
         var defer = Q.defer();
         console.log('id is ' + id);
+
         var url = app.constants.BASE_URL + 'roles/' + '?where={"users":{"__type":"Pointer","className":"_User","objectId":"' + id + '"}}';
+
         app.baseRequest.makeRequest('GET', app.constants.HEADERS, url)
             .then(function (data) {
                 console.log('taking user role...');
@@ -110,6 +108,7 @@ app.userModel = (function () {
 
     User.prototype.updateProfile = function (newEmail, newPassword) {
         var defer = Q.defer();
+
         this._requester.updateProfile(newEmail, newPassword)
             .then(function(data){
                 defer.resolve(data);

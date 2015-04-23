@@ -6,7 +6,7 @@ app.pictureRequster = (function () {
     }
 
     function getPictureHeaders() {
-        var pictureHeaders = app.constants.HEADERS;
+        var pictureHeaders = $.extend({}, app.constants.HEADERS);
         pictureHeaders['Content-Type'] = 'file.type';
 
         //todo
@@ -17,7 +17,7 @@ app.pictureRequster = (function () {
     }
 
     function getPictureRepoHeaders() {
-        var picRepoHeaders = app.constants.HEADERS;
+        var picRepoHeaders = $.extend({}, app.constants.HEADERS);
         picRepoHeaders['Content-Type'] = 'application/json';
 
         //todo

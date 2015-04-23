@@ -44,7 +44,38 @@ app.userRequester = (function () {
         };
 
     UserRequester.prototype.userLogout = function(){
-        //todo
+        var url = app.constants.BASE_URL + 'logout';
+        var headers = $.extend({}, app.constants.HEADERS);
+        var defer = Q.defer();
+        headers['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
+
+        app.baseRequest.makeRequest('POST', headers, url)
+            .then(function (data) {
+                sessionStorage.clear();
+                defer.resolve(data);
+            }, function (err) {
+                defer.reject(err);
+            });
+
+        return defer.promise;
+    };
+
+
+    UserRequester.prototype.userLogin = function (username, password) {
+        var defer = Q.defer();
+        var url = app.constants.BASE_URL + 'login/?username=' + username + '&password=' + password;
+
+        app.baseRequest.makeRequest('get', app.constants.HEADERS, url, null)
+            .then(function (userData) {
+                sessionStorage['sessionToken'] = userData.sessionToken;
+                sessionStorage['userId'] = userData.objectId;
+                defer.resolve(userData)
+            }, function (error) {
+                defer.reject(error);
+                console.log(error.responseText);
+            });
+
+        return defer.promise;
     };
 
     UserRequester.prototype.updateProfile = function (newEmail, newPassword) {
