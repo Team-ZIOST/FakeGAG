@@ -50,6 +50,7 @@ app.pictureRequster = (function () {
 
     //todo rename
     PictureRequester.prototype.uploadPicture = function (file) {
+      //  console.log(file.name)
         var pictureUploadHeaders = getPictureHeaders();
         var url = this._baseURL + '/files/' + file.name;
         return makeRequest('POST', pictureUploadHeaders, url, file);
@@ -81,17 +82,19 @@ app.pictureRequster = (function () {
         var pictureRepoHeaders = getPictureHeaders();
         return makeRequest('DELETE', pictureRepoHeaders, url, null);
     };
-
-    PictureRequester.prototype.createPictureRepo = function (data) {
+//this._model._requester.createPictureRepo(data, title, caption, category)
+    PictureRequester.prototype.createPictureRepo =
+        function (data,title, caption, category) {
         //todo
         //owner // title// votes(0) // caption //link - picture
         var picRepoHeaders = getPictureRepoHeaders();
         var classURL = this._baseURL + 'classes/Photo';
         var pictureName = data.name;
         var pictureData = {
-            title: 'todo',
+            title: title,
             votes: 0,
-            caption: 'todo',
+            caption: caption,
+            picCategory : category,
             picture: {
                 "name": pictureName,
                 "__type": "File"

@@ -12,8 +12,8 @@ app.commentController = (function(){
         this._model = model;
     }
 
-    CommentController.prototype.addComment = function ($selector) {
-        this._model.addComment($selector);
+    CommentController.prototype.addComment = function (comment, id) {
+        this._model.addComment(comment, id);
     };
 
     CommentController.prototype.getComments = function (id, $selector) {

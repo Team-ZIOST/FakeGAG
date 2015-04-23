@@ -34,6 +34,32 @@ app.pictureController = (function () {
                 console.error(err)
             })
     };
+//_this._model.uploadPicture(file,
+    PictureController.prototype.uploadPicture
+                    = function(file, title, caption, category){
+        var defer = Q.defer();
+        var _this = this;
+
+        this._model._requester.uploadPicture(file) //promise
+            .then(function(data){
+                _this._model._requester.createPictureRepo(data, title, caption, category)
+                    .then(function(data){
+                        defer.resolve(data);
+                    }, function(err){
+                        console.log(err);
+                        defer.reject(err);
+
+                    })
+            }, function (err) {
+                console.error(err)
+            });
+
+        return defer.promise;
+    };
+
+    PictureController.prototype.renderUploadPage = function(selector){
+        app.uploadView.loadUploadPage(selector, this);
+    };
 
     return {
         load: function (model, commentController) {

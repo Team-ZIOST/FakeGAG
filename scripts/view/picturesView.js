@@ -30,7 +30,7 @@ app.picturesView = (function () {
             $addCommentButton.click(function () {
                 var id = $(this).parent().attr('id');
                 console.log('sad');
-                _this._commentController.addComment($commentTextArea, id);
+                _this._commentController.addComment($commentTextArea.val(), id);
 
             });
 

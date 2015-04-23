@@ -4,7 +4,8 @@ app.registerLoginView = (function () {
     //login-register - fixed
     function loadRegisterLoginPage($selector, model) {
         $($selector).empty();
-        $.get('templates/user-login-register-template.html', function (template) {
+        $.get('templates/user-login-register-template.html',
+                function (template) {
                 var output = Mustache.render(template);
                 $($selector).html(output);
                 $('#loginButton').click(function () {
@@ -16,7 +17,7 @@ app.registerLoginView = (function () {
                 });
 
             $('#registerButton').click(function () {
-                console.log('register')
+                console.log('register');
                 var regUsername = $('[name="username"]').val();
                 var regPassWord = $('[name="password"]').val();
                 var regRepeatedPassword = $('[name="repeat-password"]').val();

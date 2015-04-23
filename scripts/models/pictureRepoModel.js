@@ -94,6 +94,11 @@ app.pictureRepoModel = (function () {
         return defer.promise;
     };
 
+    //PictureRepoModel.prototype.updatePictureInRepo = function(data){
+    //    this._requester.createPictureRepo(data)
+    //        .then()
+    //}
+
     return {
         load: function (baseURL) {
             return new PictureRepoModel(baseURL);
