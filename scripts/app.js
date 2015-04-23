@@ -7,8 +7,11 @@ var app = app || {};
         //start invoking controllers
         var $selector = $('#wrapper');
         var pictureRepoModel = app.pictureRepoModel.load(app.constants.BASE_URL);
-        var pictureController = app.pictureController.load(pictureRepoModel);
         var userModel = app.userModel.load();
+        var commentModel = app.commentModel.load(app.constants.BASE_URL);
+        var commentController = app.commentController.load(commentModel);
+        var pictureController = app.pictureController.load(pictureRepoModel, commentController);
+
         var userController = app.userController.load(userModel);
         //end invoking controllers
 

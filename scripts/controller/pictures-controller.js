@@ -1,20 +1,23 @@
 var app = app || {};
 
 app.pictureController = (function () {
-    function PictureController(model) {
+    function PictureController(model, commentController) {
         this._model = model;
+        this._commentController = commentController;
     }
 
     PictureController.prototype.renderAllPictures = function (selector) {
+        var _this = this;
         this._model.showAllPictures()
             .then(function (data) {
-                app.picturesView.load(data, selector);
+                app.picturesView.load(data, selector, _this._commentController);
             }, function (err) {
                 console.error(err)
             })
     };
 
     PictureController.prototype.renderTopTenPictures = function (selector) {
+        var _this = this;
         this._model.showTopTenPictures()
             .then(function (data) {
                 app.picturesView.load(data, selector);
@@ -33,8 +36,8 @@ app.pictureController = (function () {
     };
 
     return {
-        load: function (model) {
-            return new PictureController(model);
+        load: function (model, commentController) {
+            return new PictureController(model, commentController);
         }
     }
 

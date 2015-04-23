@@ -1,7 +1,8 @@
 var app = app || {};
 
 app.picturesView = (function () {
-    function picturesView(data, selector) {
+    function picturesView(data, selector, commentController) {
+        this._commentController =commentController;
         selector.empty();
         this._requester = app.pictureRequster.load(app.constants.BASE_URL);
         var _this = this;
@@ -26,7 +27,7 @@ app.picturesView = (function () {
             $addCommentButton.click(function () {
                 var id = $(this).parent().attr('id');
                 console.log('sad');
-                app.commentController.setComment($commentTextArea, id);
+                _this._commentController.addComment($commentTextArea, id);
 
             });
 
@@ -38,7 +39,7 @@ app.picturesView = (function () {
                     .append($addCommentButton)
                     .append($getCommentButton);
             }
-            app.commentController.getComment(pictureData._objectId, $imageDivContainer);
+            _this._commentController.getComments(pictureData._objectId, $imageDivContainer);
 
             $(selector).append($imageDivContainer);
 
@@ -46,8 +47,8 @@ app.picturesView = (function () {
     }
 
     return {
-        load: function (data, selector) {
-            return new picturesView(data, selector);
+        load: function (data, selector, commentController) {
+            return new picturesView(data, selector, commentController);
         }
     }
 }());

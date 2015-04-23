@@ -15,7 +15,7 @@ app.commentView = (function () {
             $commentDiv.append($postedBy);
             $commentContainer.append($commentDiv);
         });
-        container.append($comentContainer)
+        container.append($commentContainer)
     }
 
 

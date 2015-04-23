@@ -16,8 +16,8 @@ app.commentController = (function(){
         this._model.addComment($selector);
     };
 
-    CommentController.prototype.getComments = function ($selector) {
-        this._model.getComments($selector);
+    CommentController.prototype.getComments = function (id, $selector) {
+        this._model.getComments(id, $selector);
     };
 
     CommentController.prototype.deleteComment = function ($selector) {
