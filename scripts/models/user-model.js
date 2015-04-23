@@ -58,7 +58,6 @@ app.userModel = (function () {
         return defer.promise;
     };
 
-
     User.prototype.logout = function () {
         var url = app.constants.BASE_URL + 'logout';
         var headers = app.constants.HEADERS;
@@ -87,7 +86,6 @@ app.userModel = (function () {
                 console.log(error.responseText);
             });
 
-
         return defer.promise;
     };
 
@@ -97,7 +95,7 @@ app.userModel = (function () {
         var url = app.constants.BASE_URL + 'roles/' + '?where={"users":{"__type":"Pointer","className":"_User","objectId":"' + id + '"}}';
         app.baseRequest.makeRequest('GET', app.constants.HEADERS, url)
             .then(function (data) {
-                console.log('taking user role...')
+                console.log('taking user role...');
                 sessionStorage['userType'] = data.results[0]['name'];
                 defer.resolve(sessionStorage['userType']);
 
@@ -109,11 +107,24 @@ app.userModel = (function () {
         return defer.promise;
     };
 
+    User.prototype.updateProfile = function (newEmail, newPassword) {
+        var defer = Q.defer();
+        this._requester.updateProfile(newEmail, newPassword)
+            .then(function(data){
+                defer.resolve(data);
+                console.log(data);
+            }, function(error){
+                defer.reject(error);
+                console.log(error.responseText)
+            });
+
+        return defer.promise;
+    };
+
     return {
         //todo take requester
         load: function () {
             return new User();
         }
     };
-
 }());

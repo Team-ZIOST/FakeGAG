@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.picturesView = (function () {
-    function picturesView(data, selector, commentController) {
+    function PicturesView(data, selector, commentController) {
         this._commentController =commentController;
         selector.empty();
         this._requester = app.pictureRequster.load(app.constants.BASE_URL);
@@ -39,16 +39,16 @@ app.picturesView = (function () {
                     .append($addCommentButton)
                     .append($getCommentButton);
             }
+
             _this._commentController.getComments(pictureData._objectId, $imageDivContainer);
 
             $(selector).append($imageDivContainer);
-
         })
     }
 
     return {
         load: function (data, selector, commentController) {
-            return new picturesView(data, selector, commentController);
+            return new PicturesView(data, selector, commentController);
         }
     }
 }());
