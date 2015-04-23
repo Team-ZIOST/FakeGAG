@@ -11,6 +11,9 @@ app.picturesView = (function () {
             ////todo get the selector form sammy
             ////todo put the delete button only for admins or users
             var $image = $('<img class="image" src="' + pictureData._pictureURL + '">');
+
+            var $download = $('<a href="' + pictureData._pictureURL + '" download>Download' + '</a>');
+
             var $removeImageButton = $('<button class="removeButton">').text("Remove");
             var $imageDivContainer = $('<div class="imageContainer">').attr('id', pictureData._objectId);
             var $commentTextArea = $('<textarea id="comment">').text('Comment...');
@@ -32,6 +35,7 @@ app.picturesView = (function () {
             });
 
             $imageDivContainer.append($image);
+            $imageDivContainer.append($download);
 
             if (sessionStorage['userId']) {
                 $imageDivContainer.append($removeImageButton)
