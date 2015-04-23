@@ -1,7 +1,6 @@
 var app = app || {};
 
 app.userController = (function () {
-
     function UserController(model) {
         this._model = model;
     }
@@ -19,13 +18,13 @@ app.userController = (function () {
         var _this = this;
         this._model.login(username, password)
             .then(function (data) {
-                console.log(data.objectId)
+                console.log(data.objectId);
                 _this._model.takeUserRole(data.objectId)
                     .then(function(){
                         console.log('login complete');
                     }, function(error){
                         console.log(error.responseText);
-                    })
+                    });
                 //todo render to do view
             }, function (error) {
                 console.log(error.responseText)

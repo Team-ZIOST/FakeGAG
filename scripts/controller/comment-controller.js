@@ -8,20 +8,25 @@ app.commentController = (function(){
     //
     //});
 
-    function setComment(selecotor, id){
-        var $comment = $(selecotor).val();
-        app.commentModel.setComment($comment, id);
+    function CommentController(model) {
+        this._model = model;
+    }
 
-    }
-    function getComment(id, selector){
-        app.commentModel.getComment(id, selector);
-    }
-    function deleteComment(id){
-        var id = id;
-        app.commentController.deleteComment(id);
-    }
+    CommentController.prototype.addComment = function ($selector) {
+        this._model.addComment($selector);
+    };
+
+    CommentController.prototype.getComments = function ($selector) {
+        this._model.getComments($selector);
+    };
+
+    CommentController.prototype.deleteComment = function ($selector) {
+        this._model.deleteComment($selector);
+    };
+
     return {
-        setComment: setComment,
-        getComment: getComment
+        load: function (model) {
+            return new CommentController(model)
+        }
     }
 }());

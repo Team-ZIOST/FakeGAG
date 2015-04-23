@@ -3,7 +3,7 @@ var app = app || {};
 app.commentView = (function () {
     function renderComments(data, container) {
 
-        var $comentContainer = $('<div>');
+        var $commentContainer = $('<div>');
         
         data.results.forEach(function (comment) {
             var $commentDiv = $('<div>');
@@ -13,7 +13,7 @@ app.commentView = (function () {
             $commentDiv.append($commentText);
             $commentDiv.append($('<p>').text('Posted by: '));
             $commentDiv.append($postedBy);
-            $comentContainer.append($commentDiv);
+            $commentContainer.append($commentDiv);
         });
         container.append($comentContainer)
     }
