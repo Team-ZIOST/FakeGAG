@@ -192,6 +192,10 @@ i {
     color: #fff;
 }
 
+@-ms-viewport{
+	width: device-width;
+}
+
 @media all and (max-width: 1200px) {
 	#navbar .container {
 		width: 600px;
