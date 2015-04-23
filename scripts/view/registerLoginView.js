@@ -5,15 +5,16 @@ app.registerLoginView = (function () {
     function loadRegisterLoginPage($selector, model) {
         $($selector).empty();
         $.get('templates/user-login-register-template.html', function (template) {
-            var output = Mustache.render(template);
-            $($selector).html(output);
-            $('#loginButton').click(function () {
-                var username = $('[name="username-login"]').val();
-                var password = $('[name="password-login"]').val();
-                model.loginUser(username, password);
+                var output = Mustache.render(template);
+                $($selector).html(output);
+                $('#loginButton').click(function () {
+                    var username = $('[name="username-login"]').val();
+                    var password = $('[name="password-login"]').val();
+                    model.loginUser(username, password);
 
 
-            });
+                });
+
             $('#registerButton').click(function () {
                 console.log('register')
                 var regUsername = $('[name="username"]').val();

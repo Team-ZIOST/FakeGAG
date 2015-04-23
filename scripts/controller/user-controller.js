@@ -14,6 +14,10 @@ app.userController = (function () {
         app.registerLoginView.loadLogOutView($selector, this);
     };
 
+    UserController.prototype.renderUpdateProfile = function ($selector) {
+        app.updateProfileView.loadUpdateView($selector, this);
+    };
+
     UserController.prototype.loginUser = function (username, password) {
         var _this = this;
         this._model.login(username, password)
@@ -33,6 +37,16 @@ app.userController = (function () {
 
     UserController.prototype.registerUser = function (username, email, password) {
         this._model.register(username, email, password)
+            .then(function (data) {
+                console.log(data);
+                //todo DOM manipulation
+            }, function (error) {
+                console.log(error.responseText)
+            });
+    };
+
+    UserController.prototype.updateProfile = function (email, password) {
+        this._model.updateProfile(email, password)
             .then(function (data) {
                 console.log(data);
                 //todo DOM manipulation

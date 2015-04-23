@@ -43,10 +43,14 @@ app.baseRequest = (function () {
     }
 
     function getUsersHeaders(){
-       return  app.constants.HEADERS;
+        var headers = app.constants.HEADERS;
+        headers['Content-Type'] = 'application/json';
+
+        if (sessionStorage['sessionToken']) {
+            headers['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
+        }
+        return headers;
     }
-
-
 
     return {
         makeRequest : function(method, headers, url, data){

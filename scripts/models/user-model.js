@@ -65,6 +65,7 @@ app.userModel = (function () {
         headers['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
         app.baseRequest.makeRequest('POST', headers, url)
             .then(function (data) {
+                sessionStorage.clear();
                 defer.resolve(data);
             }, function (err) {
                 defer.reject(err);

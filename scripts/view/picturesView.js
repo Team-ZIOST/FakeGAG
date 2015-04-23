@@ -2,7 +2,7 @@ var app = app || {};
 
 app.picturesView = (function () {
     function PicturesView(data, selector, commentController) {
-        this._commentController =commentController;
+        this._commentController = commentController;
         selector.empty();
         this._requester = app.pictureRequster.load(app.constants.BASE_URL);
         var _this = this;

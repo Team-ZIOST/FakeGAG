@@ -76,11 +76,21 @@ var app = app || {};
         });
 
         this.get('#/signup-login', function () {
-
             app.setActiveLink('signup-login');
 
             if (sessionStorage['userId']) {
                 userController.renderLogout($selector);
+            } else {
+                userController.renderLogin($selector);
+            }
+
+        });
+
+        this.get('#/userPanel', function () {
+            app.setActiveLink('userPanel');
+
+            if (sessionStorage['userId']) {
+                userController.renderUpdateProfile($selector);
             } else {
                 userController.renderLogin($selector);
             }
