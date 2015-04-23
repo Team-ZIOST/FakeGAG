@@ -60,16 +60,17 @@ body {
     border: none;
 }
 
-.active a {
+#mainNav > .active a {
     color: white !important;
 }
 
-.active a::after {
+#mainNav > .active a::after {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
 
-a::after {
+#mainNav > li > a::after {
+/*a::after {*/
     position: absolute;
     top: 0;
     left: 0;
