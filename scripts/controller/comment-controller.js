@@ -1,12 +1,6 @@
 var app = app || {};
 
 app.commentController = (function(){
-    //$(document).ready(function(){
-    //    $('#add-comment').click(setComment);
-    //    $('#get-comment').click(getComment);
-    //    $('#delete-comment').click(deleteComment);
-    //
-    //});
 
     function CommentController(model) {
         this._model = model;
@@ -17,11 +11,33 @@ app.commentController = (function(){
     };
 
     CommentController.prototype.getComments = function (id, $selector) {
-        this._model.getComments(id, $selector);
+        var _this = this;
+        this._model.getComments(id, $selector)
+            .then(function(data){
+
+                app.commentView.renderComments(data,  $selector, _this)
+            }, function(err){
+               console.log(err.responseText);
+            });
     };
 
-    CommentController.prototype.deleteComment = function ($selector) {
-        this._model.deleteComment($selector);
+    CommentController.prototype.deleteComment = function (id) {
+        this._model.deleteComment(id)
+            .then(function(data){
+                console.log('deleted comment');
+            }, function(err){
+                console.log(err.responseText);
+            })
+    };
+
+
+    CommentController.prototype.editComment = function(id, data){
+        this._model.editComment(id, data)
+            .then(function(data){
+                console.log('edited');
+            }, function(err){
+                console.log(err.responseText);
+            })
     };
 
     return {

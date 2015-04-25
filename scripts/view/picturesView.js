@@ -20,7 +20,15 @@ app.picturesView = (function () {
             var $commentTextArea = $('<textarea id="comment">').text('Comment...');
             var $addCommentButton = $('<button id="add-comment">').text('Add Commment');
             var $getCommentButton = $('<button id="get-comment">').text('Show Comments');
+            var $deleteCommentButton = $('<button>').text('Delete Comment');
 
+            $deleteCommentButton.click(function(){
+                var id;
+               _this._commentController.deleteComment(id)
+
+
+            });
+            //var $commentContainer = $('<div class="commentContainer">');
             $removeImageButton.click(function () {
                 var id = $(this).parent().attr('id');
 
@@ -33,9 +41,6 @@ app.picturesView = (function () {
                 _this._commentController.addComment($commentTextArea.val(), id);
 
             });
-
-            //var $owner = $('<p>').text(pictureData._owner);
-            //$imageDivContainer.append($owner);
 
             $imageDivContainer.append($pictureTitle);
             $imageDivContainer.append($image);
@@ -51,7 +56,7 @@ app.picturesView = (function () {
 
 
             //todo check this for bugs
-            if(sessionStorage['userId'] === pictureData._owner || sessionStorage['userType'] ==='Administrators'){
+            if (sessionStorage['userId'] === pictureData._owner || sessionStorage['userType'] === 'Administrators') {
                 $imageDivContainer.append($removeImageButton)
             }
 
