@@ -4,39 +4,54 @@ app.registerLoginView = (function () {
     function loadRegisterLoginPage($selector, model) {
         $($selector).empty();
         $.get('templates/user-login-register-template.html',
-                function (template) {
+            function (template) {
                 var output = Mustache.render(template);
                 $($selector).html(output);
                 $('#loginButton').click(function () {
                     var username = $('[name="username-login"]').val();
                     var password = $('[name="password-login"]').val();
-                    model.loginUser(username, password);
+                    model.loginUser(username, password)
+                        .then(function () {
+                            $('#login-register').html('Log Out');
+                            location.replace('#/')
+
+                        }, function (err) {
+                            console.log(err.responseText);
+                        });
+//<li id="loginLogOut"><a href="#/signup-login">/li>
+//
+
                 });
 
-            $('#registerButton').click(function () {
-                console.log('register');
-                var regUsername = $('[name="username"]').val();
-                var regPassWord = $('[name="password"]').val();
-                var regRepeatedPassword = $('[name="repeat-password"]').val();
-                var regEmail = $('[name="email"]').val();
-                //todo validation, maybe code reuse
-                ///todo include values in the function
-                model.registerUser(regUsername, regEmail, regPassWord)
+                $('#registerButton').click(function () {
+                    console.log('register');
+                    var regUsername = $('[name="username"]').val();
+                    var regPassWord = $('[name="password"]').val();
+                    var regRepeatedPassword = $('[name="repeat-password"]').val();
+                    var regEmail = $('[name="email"]').val();
+                    //todo validation, maybe code reuse
+                    ///todo include values in the function
+                    model.registerUser(regUsername, regEmail, regPassWord)
+                });
             });
-        });
     }
 
     function LogoutView($selector, model) {
         $($selector).empty();
         //todo remove the logOutButton form here :)
-        var $logOutButton = $('#login-register').text('Log-out');
+        var $logOutButton = $('#loginLogOut');
         $logOutButton.click(function () {
             console.log('logged out');
             //todo - this must be the controller!
-            model.logoutUser();
+            model.logoutUser()
+                .then(function(){
+                    $('#login-register').html('Sign up/Login');
+                    location.replace('#/')
+                }, function(err){
+                    console.log(err.responseText)
+                });
             //todo render the forms again
         });
-        //$selector.append($logOutButton);
     }
 
     return {
@@ -44,7 +59,6 @@ app.registerLoginView = (function () {
         loadLogOutView: LogoutView
     }
 }());
-
 
 
 //todo use this code for checking input for login / register

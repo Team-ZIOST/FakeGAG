@@ -3,6 +3,11 @@ var app = app || {};
 (function () {
 
     app.router = Sammy(function () {
+        //todo clean up this mess
+        if(sessionStorage['userId']){
+            $('#loginLogOut').html('<a href="#/signup-login"><i class="pe-7s-key"></i><span class="menuspan" id="login-register">Log out</span></a>')
+        }
+
         //var _sammy =this;
         //start invoking controllers
         var $selector = $('#wrapper');
