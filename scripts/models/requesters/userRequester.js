@@ -43,7 +43,7 @@ app.userRequester = (function () {
             return defer.promise;
         };
 
-    UserRequester.prototype.userLogout = function(){
+    UserRequester.prototype.userLogout = function () {
         var url = app.constants.BASE_URL + 'logout';
         var headers = $.extend({}, app.constants.HEADERS);
         var defer = Q.defer();
@@ -56,7 +56,6 @@ app.userRequester = (function () {
             }, function (err) {
                 defer.reject(err);
             });
-
         return defer.promise;
     };
 
@@ -67,6 +66,7 @@ app.userRequester = (function () {
 
         app.baseRequest.makeRequest('get', app.constants.HEADERS, url, null)
             .then(function (userData) {
+                sessionStorage['username'] = username;
                 sessionStorage['sessionToken'] = userData.sessionToken;
                 sessionStorage['userId'] = userData.objectId;
                 defer.resolve(userData)

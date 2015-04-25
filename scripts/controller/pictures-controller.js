@@ -36,13 +36,13 @@ app.pictureController = (function () {
     };
 //_this._model.uploadPicture(file,
     PictureController.prototype.uploadPicture
-                    = function(file, title, caption, category){
+                    = function(file, title, caption, category, ownerName){
         var defer = Q.defer();
         var _this = this;
 
         this._model._requester.uploadPicture(file) //promise
             .then(function(data){
-                _this._model._requester.createPictureRepo(data, title, caption, category)
+                _this._model._requester.createPictureRepo(data, title, caption, category, ownerName)
                     .then(function(data){
                         defer.resolve(data);
                     }, function(err){

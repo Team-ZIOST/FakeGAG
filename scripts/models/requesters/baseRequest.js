@@ -43,13 +43,13 @@ app.baseRequest = (function () {
     }
 
     function getUsersHeaders(){
-
-        headers['Content-Type'] = 'application/json';
+        var userHeaders = $.extend({}, app.constants.HEADERS);
+        userHeaders['Content-Type'] = 'application/json';
 
         if (sessionStorage['sessionToken']) {
-            headers['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
+            userHeaders['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
         }
-        return headers;
+        return userHeaders;
 
     }
 

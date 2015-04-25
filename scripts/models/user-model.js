@@ -48,10 +48,10 @@ app.userModel = (function () {
         var defer = Q.defer();
         this._requester.userRegister(username, email, password)
 
-            .then(function(data){
+            .then(function (data) {
                 defer.resolve(data);
                 console.log(data);
-            }, function(error){
+            }, function (error) {
                 defer.reject(error);
                 console.log(error.responseText)
             });
@@ -63,11 +63,11 @@ app.userModel = (function () {
 
         this._requester.userLogout()
             .then(function (data) {
-            sessionStorage.clear();
-            defer.resolve(data);
-        }, function (err) {
-            defer.reject(err);
-        });
+                sessionStorage.clear();
+                defer.resolve(data);
+            }, function (err) {
+                defer.reject(err);
+            });
 
         return defer.promise;
     };
@@ -76,12 +76,12 @@ app.userModel = (function () {
         var defer = Q.defer();
 
         this._requester.userLogin(username, password)
-            .then(function(data){
-            defer.resolve(data);
-        }, function(error){
-            defer.reject(error);
-            console.log(error.responseText)
-        });
+            .then(function (data) {
+                defer.resolve(data);
+            }, function (error) {
+                defer.reject(error);
+                console.log(error.responseText)
+            });
 
         return defer.promise;
     };
@@ -110,10 +110,10 @@ app.userModel = (function () {
         var defer = Q.defer();
 
         this._requester.updateProfile(newEmail, newPassword)
-            .then(function(data){
+            .then(function (data) {
                 defer.resolve(data);
                 console.log(data);
-            }, function(error){
+            }, function (error) {
                 defer.reject(error);
                 console.log(error.responseText)
             });

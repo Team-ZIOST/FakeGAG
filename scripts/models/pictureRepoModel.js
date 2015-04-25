@@ -21,10 +21,12 @@ app.pictureRepoModel = (function () {
                     //todo this fields
                     var category = 'none';
                     //pointer owner
-                    var owner = sessionStorage['userId'];
+                    var owner = pictureData.owner.objectId;
                     var objectId = pictureData.objectId;
                     var votes = pictureData.votes;
-                    var picture = new Picture(objectId, title, caption, pictureUrl, votes, category, owner);
+                    var ownerName = pictureData.ownerName;
+                    var picture = new Picture(objectId, title, caption, pictureUrl, votes, category, owner, ownerName);
+                    //console.log(picture)
                     _this.pictureRepo.push(picture);
                 });
 
@@ -74,6 +76,8 @@ app.pictureRepoModel = (function () {
             .then(function (data) {
 
                 data.results.forEach(function (pictureData) {
+                    console.log(pictureData);
+
                     var title = pictureData.title;
                     var caption = pictureData.caption;
                     var pictureUrl = pictureData.picture.url;
@@ -82,8 +86,9 @@ app.pictureRepoModel = (function () {
                     var owner = 'owner';
                     var objectId = pictureData.objectId;
                     var votes = pictureData.votes;
-                    var picture = new Picture(objectId, title, caption, pictureUrl, votes, category, owner);
-                    console.log(picture);
+                    var uploaderName = pictureData.ownerName;
+                    var picture = new Picture(objectId, title, caption, pictureUrl, votes, category, owner, uploaderName);
+                    //console.log(picture);
                     _this.pictureRepo.push(picture);
                 });
                 defer.resolve(_this.pictureRepo);

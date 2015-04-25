@@ -11,9 +11,10 @@ app.picturesView = (function () {
             ////todo get the selector form sammy
             ////todo put the delete button only for admins or users
             var $image = $('<img class="image" src="' + pictureData._pictureURL + '">');
-
+            var $postedBy = $('<p class="postedBy">').text('Posted by: ' + pictureData._ownerName);
             var $download = $('<a href="' + pictureData._pictureURL + '" download>Download' + '</a>');
-
+            var $pictureTitle = $('<h1 class="pictureTitle">').text(pictureData._title);
+            var $pictureDescription = $('<h2 class="pictureDescription">').text(pictureData._caption);
             var $removeImageButton = $('<button class="removeButton">').text("Remove");
             var $imageDivContainer = $('<div class="imageContainer">').attr('id', pictureData._objectId);
             var $commentTextArea = $('<textarea id="comment">').text('Comment...');
@@ -29,19 +30,29 @@ app.picturesView = (function () {
 
             $addCommentButton.click(function () {
                 var id = $(this).parent().attr('id');
-                console.log('sad');
                 _this._commentController.addComment($commentTextArea.val(), id);
 
             });
 
+            //var $owner = $('<p>').text(pictureData._owner);
+            //$imageDivContainer.append($owner);
+
+            $imageDivContainer.append($pictureTitle);
             $imageDivContainer.append($image);
+            $imageDivContainer.append($pictureDescription);
+            $imageDivContainer.append($postedBy);
             $imageDivContainer.append($download);
 
             if (sessionStorage['userId']) {
-                $imageDivContainer.append($removeImageButton)
-                    .append($commentTextArea)
+                $imageDivContainer.append($commentTextArea)
                     .append($addCommentButton)
                     .append($getCommentButton);
+            }
+
+
+            //todo check this for bugs
+            if(sessionStorage['userId'] === pictureData._owner || sessionStorage['userType'] ==='Administrators'){
+                $imageDivContainer.append($removeImageButton)
             }
 
             _this._commentController.getComments(pictureData._objectId, $imageDivContainer);

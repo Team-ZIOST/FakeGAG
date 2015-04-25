@@ -84,7 +84,7 @@ app.pictureRequster = (function () {
     };
 //this._model._requester.createPictureRepo(data, title, caption, category)
     PictureRequester.prototype.createPictureRepo =
-        function (data,title, caption, category) {
+        function (data,title, caption, category, ownerName) {
         //todo
         //owner // title// votes(0) // caption //link - picture
         var picRepoHeaders = getPictureRepoHeaders();
@@ -95,6 +95,7 @@ app.pictureRequster = (function () {
             votes: 0,
             caption: caption,
             picCategory : category,
+            ownerName : sessionStorage['username'],
             picture: {
                 "name": pictureName,
                 "__type": "File"
