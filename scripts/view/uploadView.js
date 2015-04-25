@@ -28,6 +28,7 @@ app.uploadView = (function () {
                             console.log(err)
                         });
                 }
+                //app.router._Sammy.redirect('#/');
             });
         });
     }

@@ -20,24 +20,22 @@ app.commentView = (function () {
             var $commentEditButton = $('<button class="commentEdit">').text('Edit');
 
 
-
-            $commentDeleteButton.click(function(){
+            $commentDeleteButton.click(function () {
                 _this._commentController.deleteComment(comment.objectId);
 
             });
 
-            $commentEditButton.click(function(){
+            $commentEditButton.click(function () {
                 var $editInput = $('<input type="text">');
                 $commentDiv.append($editInput);
                 var $confirmButton = $('<button>').text('Confirm');
                 $commentDiv.append($confirmButton);
-                $confirmButton.click(function(){
+                $confirmButton.click(function () {
                     _this._commentController.editComment(comment.objectId, $editInput.val());
-
                 })
 
             });
-          //  console.log(comment)
+            //  console.log(comment)
             //autor id : data.results.author.objectId\
             if (sessionStorage['userId'] === comment.author.objectId || sessionStorage['userType'] === 'Administrators') {
                 $commentDiv.append($commentDeleteButton);

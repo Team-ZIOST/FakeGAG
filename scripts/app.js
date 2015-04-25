@@ -21,8 +21,11 @@ var app = app || {};
         });
 
         this.get('#/upload', function () {
-            pictureController.renderUploadPage($selector);
-            //app.setActiveLink('upload');
+            if (sessionStorage['userId']) {
+                pictureController.renderUploadPage($selector);
+            } else {
+                userController.renderLogin($selector);
+            }
 
         });
 
@@ -56,13 +59,6 @@ var app = app || {};
 
         });
 
-        //
-        //return{
-        //    sammy : function(){
-        //        return _sammy;
-        //    }
-        //}
-
 
         this.get('#/userPanel', function () {
             app.setActiveLink('userPanel');
@@ -78,5 +74,7 @@ var app = app || {};
     });
 
     app.router.run('#/');
+
+    //
 
 }());

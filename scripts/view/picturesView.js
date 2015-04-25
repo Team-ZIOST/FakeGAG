@@ -57,7 +57,7 @@ app.picturesView = (function () {
 
             //todo check this for bugs
             if (sessionStorage['userId'] === pictureData._owner || sessionStorage['userType'] === 'Administrators') {
-                $imageDivContainer.append($removeImageButton)
+                $imageDivContainer.append($removeImageButton);
             }
 
             _this._commentController.getComments(pictureData._objectId, $imageDivContainer);

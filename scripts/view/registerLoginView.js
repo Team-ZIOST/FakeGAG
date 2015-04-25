@@ -1,7 +1,6 @@
 var app = app || {};
 
 app.registerLoginView = (function () {
-    //login-register - fixed
     function loadRegisterLoginPage($selector, model) {
         $($selector).empty();
         $.get('templates/user-login-register-template.html',
@@ -12,8 +11,6 @@ app.registerLoginView = (function () {
                     var username = $('[name="username-login"]').val();
                     var password = $('[name="password-login"]').val();
                     model.loginUser(username, password);
-
-
                 });
 
             $('#registerButton').click(function () {
@@ -24,9 +21,7 @@ app.registerLoginView = (function () {
                 var regEmail = $('[name="email"]').val();
                 //todo validation, maybe code reuse
                 ///todo include values in the function
-                // model.userRegister()
                 model.registerUser(regUsername, regEmail, regPassWord)
-
             });
         });
     }
@@ -34,15 +29,14 @@ app.registerLoginView = (function () {
     function LogoutView($selector, model) {
         $($selector).empty();
         //todo remove the logOutButton form here :)
-        var $logOutButton = $('<button id="logOutButton">').text('Log-out');
+        var $logOutButton = $('#login-register').text('Log-out');
         $logOutButton.click(function () {
             console.log('logged out');
             //todo - this must be the controller!
             model.logoutUser();
-
             //todo render the forms again
         });
-        $selector.append($logOutButton);
+        //$selector.append($logOutButton);
     }
 
     return {
