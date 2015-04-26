@@ -18,21 +18,27 @@ app.pictureController = (function () {
 
     PictureController.prototype.renderTopTenPictures = function (selector) {
         var _this = this;
+
         this._model.showTopTenPictures()
             .then(function (data) {
-                app.picturesView.load(data, selector);
+                app.picturesView.load(data, selector, _this._commentController);
             }, function (err) {
                 console.error(err)
             })
     };
 
-    PictureController.prototype.renderPicturesByCategory = function (selector, category) {
+    PictureController.prototype.renderPicturesByCategory = function ($selector, category) {
+        $selector.empty();
+        var defer = Q.defer();
+        var _this = this;
         this._model.showPicturesByCategory(category)
             .then(function (data) {
-                app.picturesView.load(data, selector);
+                app.picturesView.load(data, $selector, _this._commentController);
             }, function (err) {
-                console.error(err)
-            })
+                defer.reject(err);
+            });
+
+        return defer.promise;
     };
 
     PictureController.prototype.uploadPicture
@@ -48,10 +54,9 @@ app.pictureController = (function () {
                     }, function (err) {
                         console.log(err);
                         defer.reject(err);
-
                     })
             }, function (err) {
-                console.error(err)
+                console.error(err.responseText)
             });
 
         return defer.promise;
@@ -59,6 +64,10 @@ app.pictureController = (function () {
 
     PictureController.prototype.renderUploadPage = function (selector) {
         app.uploadView.loadUploadPage(selector, this);
+    };
+
+    PictureController.prototype.renderCategoryPage = function (selector) {
+        app.categoryView.loadCategoryView(selector, this);
     };
 
     return {

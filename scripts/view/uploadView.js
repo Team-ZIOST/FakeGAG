@@ -23,6 +23,7 @@ app.uploadView = (function () {
 
                     _this._model.uploadPicture(file, title, caption, category)
                         .then(function(data){
+                            console.log(data);
                             location.replace('#/');
                         }, function(err){
                             console.log(err)

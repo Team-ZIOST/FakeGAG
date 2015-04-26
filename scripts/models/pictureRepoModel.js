@@ -19,7 +19,7 @@ app.pictureRepoModel = (function () {
                     var caption = pictureData.caption;
                     var pictureUrl = pictureData.picture.url;
                     //todo this fields
-                    var category = 'none';
+                    var category = pictureData.picCategory;
                     //pointer owner
                     var owner = pictureData.owner.objectId;
                     var objectId = pictureData.objectId;
@@ -51,10 +51,12 @@ app.pictureRepoModel = (function () {
                     var caption = pictureData.caption;
                     var pictureUrl = pictureData.picture.url;
                     //todo this fields
-                    var category = 'none';
-                    var owner = 'owner';
+                    var category = pictureData.picCategory;
+                    //pointer owner
+                    var owner = pictureData.owner.objectId;
                     var objectId = pictureData.objectId;
                     var votes = pictureData.votes;
+                    var ownerName = pictureData.ownerName;
                     var picture = new Picture(objectId, title, caption, pictureUrl, votes, category, owner);
                     console.log(picture);
                     _this.pictureRepo.push(picture);
@@ -82,12 +84,13 @@ app.pictureRepoModel = (function () {
                     var caption = pictureData.caption;
                     var pictureUrl = pictureData.picture.url;
                     //todo this fields
-                    var category = 'none';
-                    var owner = 'owner';
+                    var category = pictureData.picCategory;
+                    //pointer owner
+                    var owner = pictureData.owner.objectId;
                     var objectId = pictureData.objectId;
                     var votes = pictureData.votes;
-                    var uploaderName = pictureData.ownerName;
-                    var picture = new Picture(objectId, title, caption, pictureUrl, votes, category, owner, uploaderName);
+                    var ownerName = pictureData.ownerName;
+                    var picture = new Picture(objectId, title, caption, pictureUrl, votes, category, owner, ownerName);
                     //console.log(picture);
                     _this.pictureRepo.push(picture);
                 });
@@ -99,10 +102,6 @@ app.pictureRepoModel = (function () {
         return defer.promise;
     };
 
-    //PictureRepoModel.prototype.updatePictureInRepo = function(data){
-    //    this._requester.createPictureRepo(data)
-    //        .then()
-    //}
 
     return {
         load: function (baseURL) {

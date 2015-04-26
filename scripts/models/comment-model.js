@@ -7,39 +7,63 @@ app.commentModel = (function () {
     }
 
     Comment.prototype.addComment = function (comment, photoId) {
-        var data = JSON.stringify({'content': comment});
+        var defer = Q.defer();
+        var data = JSON.stringify({
+            'content': comment,
+            'author': {
+                "__type": "Pointer",
+                "className": "_User",
+                "objectId": sessionStorage['userId']
+
+            },
+            'photo': {
+                "__type": "Pointer",
+                "className": "Photo",
+                "objectId": photoId
+            }
+
+
+        });
         var url = this._serviseUrl;
 
         app.baseRequest.makeRequest('POST', app.constants.HEADERS, url, data)
-            .then(function (d) {
-                var dataPut = JSON.stringify({
-                    'author': {
-                        "__type": "Pointer",
-                        "className": "_User",
-                        "objectId": sessionStorage['userId']
+            .then(function(data){
+                defer.resolve(data);
+            }, function(err){
+               defer.reject(err);
+            });
 
-                    },
-                    'photo': {
-                        "__type": "Pointer",
-                        "className": "Photo",
-                        "objectId": photoId
-                    }
-                });
+        return defer.promise;
 
-                app.baseRequest.makeRequest('PUT', app.constants.HEADERS, url + d.objectId, dataPut)
-                    .then(function () {
-                        console.log('comment added');
-                    }, function (err) {
-                        console.log(err);
-                    })
-            })
+        //.then(function (d) {
+        //    var dataPut = JSON.stringify({
+        //        'author': {
+        //            "__type": "Pointer",
+        //            "className": "_User",
+        //            "objectId": sessionStorage['userId']
+        //
+        //        },
+        //        'photo': {
+        //            "__type": "Pointer",
+        //            "className": "Photo",
+        //            "objectId": photoId
+        //        }
+        //    });
+        //    app.baseRequest.makeRequest('PUT', app.constants.HEADERS, url + d.objectId, dataPut)
+        //
+        //
+        //}, function (err) {
+        //    console.log(err);
+        //});
+        //return defer.promise;
     };
 
     Comment.prototype.getComments = function (id, selector) {
         var defer = Q.defer();
-        var url = this._serviseUrl +'?where={"photo": { "__type": "Pointer","className": "Photo",   "objectId": "' + id + '"}}&include=photo,author';
+        var url = this._serviseUrl + '?where={"photo": { "__type": "Pointer","className": "Photo",   "objectId": "' + id + '"}}&include=photo,author';
         app.baseRequest.makeRequest('GET', app.constants.HEADERS, url, {})
             .then(function (d) {
+                //console.log(d)
                 defer.resolve(d);
                 //app.commentView.renderComments(d, selector)
             }, function (err) {
@@ -61,16 +85,16 @@ app.commentModel = (function () {
         return defer.promise;
     };
 
-    Comment.prototype.editComment = function (id, editedData){
+    Comment.prototype.editComment = function (id, editedData) {
         var defer = Q.defer();
         var url = this._serviseUrl + id;
         var data = {
-          content : editedData
+            content: editedData
         };
         app.baseRequest.makeRequest('PUT', app.constants.HEADERS, url, JSON.stringify(data))
-            .then(function(data){
+            .then(function (data) {
                 defer.resolve(data);
-            }, function(err){
+            }, function (err) {
                 defer.reject(err);
             });
 

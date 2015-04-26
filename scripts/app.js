@@ -4,12 +4,10 @@ var app = app || {};
 
     app.router = Sammy(function () {
         //todo clean up this mess
-        if(sessionStorage['userId']){
+        if (sessionStorage['userId']) {
             $('#loginLogOut').html('<a href="#/signup-login"><i class="pe-7s-key"></i><span class="menuspan" id="login-register">Log out</span></a>')
         }
 
-        //var _sammy =this;
-        //start invoking controllers
         var $selector = $('#wrapper');
         var pictureRepoModel = app.pictureRepoModel.load(app.constants.BASE_URL);
         var userModel = app.userModel.load();
@@ -48,10 +46,9 @@ var app = app || {};
             pictureController.renderTopTenPictures($selector);
         });
 
-        this.get('#/cats', function () {
-            app.setActiveLink('cats');
-            pictureController.renderPicturesByCategory($selector, 'cats');
-            console.log('cats');
+        this.get('#/categories', function () {
+            app.setActiveLink('categories');
+            pictureController.renderCategoryPage($selector);
         });
 
         this.get('#/signup-login', function () {
@@ -79,7 +76,5 @@ var app = app || {};
     });
 
     app.router.run('#/');
-
-    //
 
 }());

@@ -50,7 +50,7 @@ app.pictureRequster = (function () {
 
     //todo rename
     PictureRequester.prototype.uploadPicture = function (file) {
-      //  console.log(file.name)
+        //  console.log(file.name)
         var pictureUploadHeaders = getPictureHeaders();
         var url = this._baseURL + '/files/' + file.name;
         return makeRequest('POST', pictureUploadHeaders, url, file);
@@ -71,9 +71,9 @@ app.pictureRequster = (function () {
     };
 
     PictureRequester.prototype.getPicturesByCategory = function (category) {
-        var url = this._baseURL + 'classes/Photo?where={"category":{"$select":{"query":{"className":"Category","where":{"name":"' + category + '"}},"key":"objectId"}}}';
+        //var url = this._baseURL + 'classes/Photo?where={"category":{"$select":{"query":{"className":"Category","where":{"name":"' + category + '"}},"key":"objectId"}}}';
+        var url = this._baseURL + 'classes/Photo?where={"picCategory":"' + category + '"}';
         var pictureRepoHeaders = getPictureRepoHeaders();
-
         return makeRequest('GET', pictureRepoHeaders, url, null);
     };
 
@@ -84,31 +84,31 @@ app.pictureRequster = (function () {
     };
 //this._model._requester.createPictureRepo(data, title, caption, category)
     PictureRequester.prototype.createPictureRepo =
-        function (data,title, caption, category, ownerName) {
-        //todo
-        //owner // title// votes(0) // caption //link - picture
-        var picRepoHeaders = getPictureRepoHeaders();
-        var classURL = this._baseURL + 'classes/Photo';
-        var pictureName = data.name;
-        var pictureData = {
-            title: title,
-            votes: 0,
-            caption: caption,
-            picCategory : category,
-            ownerName : sessionStorage['username'],
-            picture: {
-                "name": pictureName,
-                "__type": "File"
-            },
+        function (data, title, caption, category, ownerName) {
+            //todo
+            //owner // title// votes(0) // caption //link - picture
+            var picRepoHeaders = getPictureRepoHeaders();
+            var classURL = this._baseURL + 'classes/Photo';
+            var pictureName = data.name;
+            var pictureData = {
+                title: title,
+                votes: 0,
+                caption: caption,
+                picCategory: category,
+                ownerName: sessionStorage['username'],
+                picture: {
+                    "name": pictureName,
+                    "__type": "File"
+                },
 
-            owner: {
-                "__type": "Pointer",
-                "className": "_User",
-                "objectId": sessionStorage['userId']
-            }
+                owner: {
+                    "__type": "Pointer",
+                    "className": "_User",
+                    "objectId": sessionStorage['userId']
+                }
+            };
+            return makeRequest('POST', picRepoHeaders, classURL, JSON.stringify(pictureData));
         };
-        return makeRequest('POST', picRepoHeaders, classURL, JSON.stringify(pictureData));
-    };
 
     return {
         load: function (baseURL) {

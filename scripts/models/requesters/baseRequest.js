@@ -3,7 +3,7 @@ var app = app || {};
 app.baseRequest = (function () {
     function makeRequest(method, headers, url, data) {
         var defer = Q.defer();
-            $.ajax({
+        $.ajax({
             method: method,
             headers: headers,
             url: url,
@@ -42,7 +42,7 @@ app.baseRequest = (function () {
         return picRepoHeaders;
     }
 
-    function getUsersHeaders(){
+    function getUsersHeaders() {
         var userHeaders = $.extend({}, app.constants.HEADERS);
         userHeaders['Content-Type'] = 'application/json';
 
@@ -54,16 +54,16 @@ app.baseRequest = (function () {
     }
 
     return {
-        makeRequest : function(method, headers, url, data){
-           return makeRequest(method, headers, url, data)
+        makeRequest: function (method, headers, url, data) {
+            return makeRequest(method, headers, url, data)
         },
-        getPictureRepoHeaders : function(){
+        getPictureRepoHeaders: function () {
             return getPictureRepoHeaders();
         },
-        getPictureHeaders: function(){
-           return getPictureHeaders();
+        getPictureHeaders: function () {
+            return getPictureHeaders();
         },
-        getUserHeaders :function(){
+        getUserHeaders: function () {
             return getUsersHeaders()
         }
     }

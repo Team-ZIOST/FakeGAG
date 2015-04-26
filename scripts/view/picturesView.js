@@ -8,8 +8,7 @@ app.picturesView = (function () {
         var _this = this;
         data.forEach(function (pictureData) {
             console.log(pictureData);
-            ////todo get the selector form sammy
-            ////todo put the delete button only for admins or users
+            //var imageId = pictureData._objectId;
             var $image = $('<img class="image" src="' + pictureData._pictureURL + '">');
             var $postedBy = $('<p class="postedBy">').text('Posted by: ' + pictureData._ownerName);
             var $download = $('<a href="' + pictureData._pictureURL + '" download>Download' + '</a>');
@@ -21,29 +20,39 @@ app.picturesView = (function () {
             var $addCommentButton = $('<button id="add-comment">').text('Add Commment');
             var $getCommentButton = $('<button id="get-comment">').text('Show Comments');
             var $deleteCommentButton = $('<button>').text('Delete Comment');
+            var $voteCount = $('<span>').text('Rating ' +pictureData._votes);
 
-            $deleteCommentButton.click(function(){
+            $deleteCommentButton.click(function () {
                 var id;
-               _this._commentController.deleteComment(id)
-
-
+                _this._commentController.deleteComment(id)
             });
-            //var $commentContainer = $('<div class="commentContainer">');
+
             $removeImageButton.click(function () {
                 var id = $(this).parent().attr('id');
-
                 _this._requester.deletePicture(id);
                 $("#" + id).remove();
             });
 
             $addCommentButton.click(function () {
+                var commentContent = $commentTextArea.val();
                 var id = $(this).parent().attr('id');
-                _this._commentController.addComment($commentTextArea.val(), id);
+                _this._commentController.addComment(commentContent, id, selector)
+                    .then(function (data) {
+                        //console.log(data);
+                        var commentId = data.objectId;
+                        var authorName = sessionStorage['username'];
+                        var authorId = sessionStorage['userId'];
+                        app.commentView.renderComments(commentId, commentContent,
+                            authorName, id, _this._commentController, authorId);
+                    }, function (err) {
+                        console.log(err.responseText)
+                    })
 
             });
 
             $imageDivContainer.append($pictureTitle);
             $imageDivContainer.append($image);
+            $imageDivContainer.append($voteCount);
             $imageDivContainer.append($pictureDescription);
             $imageDivContainer.append($postedBy);
             $imageDivContainer.append($download);
@@ -54,15 +63,25 @@ app.picturesView = (function () {
                     .append($getCommentButton);
             }
 
-
-            //todo check this for bugs
             if (sessionStorage['userId'] === pictureData._owner || sessionStorage['userType'] === 'Administrators') {
                 $imageDivContainer.append($removeImageButton);
             }
 
-            _this._commentController.getComments(pictureData._objectId, $imageDivContainer);
+            _this._commentController.getComments(pictureData._objectId, $imageDivContainer)
+                .then(function (data) {
+                    console.log(data);
+                    data.results.forEach(function (comment) {
+                        app.commentView.renderComments(comment.objectId, comment.content,
+                            comment.author.username, pictureData['_objectId'],
+                            _this._commentController, comment.author.objectId);
+                    })
+
+                }, function (err) {
+                    console.log(err)
+                });
 
             $(selector).append($imageDivContainer);
+
         })
     }
 
@@ -71,4 +90,5 @@ app.picturesView = (function () {
             return new PicturesView(data, selector, commentController);
         }
     }
+
 }());

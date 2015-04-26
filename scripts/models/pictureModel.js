@@ -11,5 +11,5 @@ var Picture = (function () {
     }
 
     return Picture;
-//picture Binding Model
+
 }());
