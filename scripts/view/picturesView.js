@@ -8,7 +8,6 @@ app.picturesView = (function () {
         var _this = this;
         data.forEach(function (pictureData) {
             //console.log(pictureData);
-
             var $image = $('<img class="image" src="' + pictureData._pictureURL + '">');
             var $postedBy = $('<p class="postedBy">').text('Posted by: ' + pictureData._ownerName);
             var $download = $('<a href="' + pictureData._pictureURL + '" download>Download' + '</a>');
@@ -73,10 +72,10 @@ app.picturesView = (function () {
 
             if (sessionStorage['userId']) {
                 $imageDivContainer.append($commentTextArea)
-                    .append($addCommentButton)
-                    .append($getCommentButton)
                     .append($voteUpButton)
-                    .append($voteDownButton);
+                    .append($voteDownButton)
+                    .append($addCommentButton)
+                    .append($getCommentButton);
             }
 
             if (sessionStorage['userId'] === pictureData._owner || sessionStorage['userType'] === 'Administrators') {

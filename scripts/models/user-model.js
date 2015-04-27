@@ -47,14 +47,14 @@ app.userModel = (function () {
         //console.log('reg');
         var defer = Q.defer();
         this._requester.userRegister(username, email, password)
-
             .then(function (data) {
                 defer.resolve(data);
-                console.log(data);
+                //console.log(data);
             }, function (error) {
                 defer.reject(error);
-                console.log(error.responseText)
+                //console.log(error.responseText)
             });
+
         return defer.promise;
     };
 
@@ -87,19 +87,17 @@ app.userModel = (function () {
     };
 
     User.prototype.takeUserRole = function takeUserRole(id) {
-        var defer = Q.defer();
-        console.log('id is ' + id);
-
-        var url = app.constants.BASE_URL + 'roles/' + '?where={"users":{"__type":"Pointer","className":"_User","objectId":"' + id + '"}}';
+        var defer = Q.defer(),
+            url = app.constants.BASE_URL + 'roles/' + '?where={"users":{"__type":"Pointer","className":"_User","objectId":"' + id + '"}}';
+        //console.log('id is ' + id);
 
         app.baseRequest.makeRequest('GET', app.constants.HEADERS, url)
             .then(function (data) {
-                console.log('taking user role...');
+                //console.log('taking user role...');
                 sessionStorage['userType'] = data.results[0]['name'];
                 defer.resolve(sessionStorage['userType']);
-
             }, function (error) {
-                console.log(error);
+                //console.log(error);
                 defer.reject(error);
             });
 
@@ -112,10 +110,10 @@ app.userModel = (function () {
         this._requester.updateProfile(newEmail, newPassword)
             .then(function (data) {
                 defer.resolve(data);
-                console.log(data);
+                //console.log(data);
             }, function (error) {
                 defer.reject(error);
-                console.log(error.responseText)
+                //console.log(error.responseText)
             });
 
         return defer.promise;

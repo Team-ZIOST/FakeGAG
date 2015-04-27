@@ -49,8 +49,8 @@ app.baseRequest = (function () {
         if (sessionStorage['sessionToken']) {
             userHeaders['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
         }
-        return userHeaders;
 
+        return userHeaders;
     }
 
     return {

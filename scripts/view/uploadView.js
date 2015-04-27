@@ -5,9 +5,11 @@ app.uploadView = (function () {
 
     //todo what the fuck controller
     function uploadViewPage($selector, controller) {
-        this._model = controller;
         var _this = this;
+
+        this._model = controller;
         $($selector).empty();
+
         $.get('templates/upload-template.html', function (template) {
             var output = Mustache.render(template);
             $($selector).html(output);
@@ -22,10 +24,10 @@ app.uploadView = (function () {
                 if (app.constants.SUPPORTED_FORMATS.indexOf(file.type) !== -1) {
 
                     _this._model.uploadPicture(file, title, caption, category)
-                        .then(function(data){
+                        .then(function (data) {
                             console.log(data);
                             location.replace('#/');
-                        }, function(err){
+                        }, function (err) {
                             console.log(err)
                         });
                 }
@@ -34,8 +36,7 @@ app.uploadView = (function () {
         });
     }
 
-    return{
-        loadUploadPage : uploadViewPage
+    return {
+        loadUploadPage: uploadViewPage
     }
-
 }());

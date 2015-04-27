@@ -14,7 +14,6 @@ var app = app || {};
         var commentModel = app.commentModel.load(app.constants.BASE_URL);
         var commentController = app.commentController.load(commentModel);
         var pictureController = app.pictureController.load(pictureRepoModel, commentController);
-
         var userController = app.userController.load(userModel);
         //end invoking controllers
 
@@ -58,9 +57,7 @@ var app = app || {};
             } else {
                 userController.renderLogin($selector);
             }
-
         });
-
 
         this.get('#/userPanel', function () {
             app.setActiveLink('userPanel');
@@ -70,11 +67,8 @@ var app = app || {};
             } else {
                 userController.renderLogin($selector);
             }
-
         });
-
     });
 
     app.router.run('#/');
-
 }());

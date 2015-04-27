@@ -8,6 +8,7 @@ app.pictureController = (function () {
 
     PictureController.prototype.renderAllPictures = function (selector) {
         var _this = this;
+
         this._model.showAllPictures()
             .then(function (data) {
                 app.picturesView.load(data, selector, _this._commentController);
@@ -41,12 +42,11 @@ app.pictureController = (function () {
         return defer.promise;
     };
 
-    PictureController.prototype.uploadPicture
-        = function (file, title, caption, category, ownerName) {
+    PictureController.prototype.uploadPicture = function (file, title, caption, category, ownerName) {
         var defer = Q.defer();
         var _this = this;
 
-        this._model._requester.uploadPicture(file) //promise
+        this._model._requester.uploadPicture(file)
             .then(function (data) {
                 _this._model._requester.createPictureRepo(data, title, caption, category, ownerName)
                     .then(function (data) {
@@ -75,5 +75,4 @@ app.pictureController = (function () {
             return new PictureController(model, commentController);
         }
     }
-
 }());

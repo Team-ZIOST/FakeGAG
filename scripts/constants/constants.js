@@ -1,4 +1,4 @@
-var app = app  || {};
+var app = app || {};
 
 app.constants = (function () {
     var baseURL = 'https://api.parse.com/1/';

@@ -7,7 +7,6 @@ app.userController = (function () {
 
     UserController.prototype.renderLogin = function ($selector) {
         app.registerLoginView.loginRegisterView($selector, this);
-
     };
 
     UserController.prototype.renderLogout = function ($selector) {
@@ -21,18 +20,18 @@ app.userController = (function () {
     UserController.prototype.loginUser = function (username, password) {
         var _this = this;
         var defer = Q.defer();
+
         this._model.login(username, password)
             .then(function (data) {
                 console.log(data.objectId);
                 _this._model.takeUserRole(data.objectId)
-                    .then(function(d){
+                    .then(function (d) {
                         defer.resolve(d);
                         console.log('login complete');
-                    }, function(error){
+                    }, function (error) {
                         defer.reject(error);
                         console.log(error.responseText);
                     });
-
 
                 //todo render to do view
             }, function (error) {
@@ -70,7 +69,7 @@ app.userController = (function () {
                 //todo dom manipulations
 
             }, function (error) {
-               defer.reject(error);
+                defer.reject(error);
             });
 
         return defer.promise;
@@ -81,5 +80,4 @@ app.userController = (function () {
             return new UserController(model)
         }
     }
-
 }());

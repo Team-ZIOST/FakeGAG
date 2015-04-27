@@ -27,7 +27,6 @@ app.pictureRequster = (function () {
         return picRepoHeaders;
     }
 
-
     function makeRequest(method, headers, url, data) {
         var defer = Q.defer();
 
@@ -53,6 +52,7 @@ app.pictureRequster = (function () {
         //  console.log(file.name)
         var pictureUploadHeaders = getPictureHeaders();
         var url = this._baseURL + '/files/' + file.name;
+
         return makeRequest('POST', pictureUploadHeaders, url, file);
     };
 
@@ -63,6 +63,7 @@ app.pictureRequster = (function () {
         var data = JSON.stringify({
             votes: votes
         });
+
         return makeRequest('PUT', pictureUploadHeaders, url, data);
     };
 
@@ -70,6 +71,7 @@ app.pictureRequster = (function () {
         //todo  check if this url must be here
         var url = this._baseURL + 'classes/Photo/';
         var pictureRepoHeaders = getPictureRepoHeaders();
+
         return makeRequest('GET', pictureRepoHeaders, url, null);
     };
 
@@ -84,12 +86,14 @@ app.pictureRequster = (function () {
         //var url = this._baseURL + 'classes/Photo?where={"category":{"$select":{"query":{"className":"Category","where":{"name":"' + category + '"}},"key":"objectId"}}}';
         var url = this._baseURL + 'classes/Photo?where={"picCategory":"' + category + '"}';
         var pictureRepoHeaders = getPictureRepoHeaders();
+
         return makeRequest('GET', pictureRepoHeaders, url, null);
     };
 
     PictureRequester.prototype.deletePicture = function (id) {
         var url = this._baseURL + 'classes/Photo/' + id;
         var pictureRepoHeaders = getPictureHeaders();
+
         return makeRequest('DELETE', pictureRepoHeaders, url, null);
     };
 //this._model._requester.createPictureRepo(data, title, caption, category)
@@ -117,6 +121,7 @@ app.pictureRequster = (function () {
                     "objectId": sessionStorage['userId']
                 }
             };
+
             return makeRequest('POST', picRepoHeaders, classURL, JSON.stringify(pictureData));
         };
 

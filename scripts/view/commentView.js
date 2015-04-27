@@ -3,25 +3,24 @@ var app = app || {};
 app.commentView = (function () {
 
     function RenderComments(commentId, commentContent, authorName, container, commentController, authorId) {
-        this._commentController = commentController;
-        var containerId = container;
-        console.log(containerId);
-        var $commentContainer = $('<div>');
-        var _this = this;
+        var containerId = container,
+            $commentContainer = $('<div>'),
+            _this = this;
 
-        var $commentDiv = $('<div>');
-        $commentDiv.attr('id', commentId);
+        var $commentDiv = $('<div>').attr('id', commentId);
         var $commentText = $('<p>').text(commentContent);
-        //$commentDiv.attr('id', comment.objectId);
         var $postedBy = $('<p>').text(authorName);
-        $commentDiv.append($commentText);
-        $commentDiv.append($('<p>').text('Posted by: '));
-        $commentDiv.append($postedBy);
-        $commentContainer.append($commentDiv);
+
+        this._commentController = commentController;
+
+        $commentDiv.append($commentText)
+        append($('<p>')
+            .text('Posted by: '))
+            .append($postedBy)
+            .appendTo($commentContainer);
 
         var $commentDeleteButton = $('<button class="commentDelete">').text('Delete');
         var $commentEditButton = $('<button class="commentEdit">').text('Edit');
-
 
         $commentDeleteButton.click(function () {
             _this._commentController.deleteComment(commentId)
@@ -30,7 +29,6 @@ app.commentView = (function () {
                 }, function (err) {
                     console.log(err.responseText);
                 })
-
         });
 
         $commentEditButton.click(function () {
@@ -63,7 +61,6 @@ app.commentView = (function () {
         console.log('added');
         $('#' + containerId).append($commentContainer)
     }
-
 
     return {
         renderComments: RenderComments

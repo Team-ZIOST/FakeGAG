@@ -18,9 +18,6 @@ app.registerLoginView = (function () {
                         }, function (err) {
                             console.log(err.responseText);
                         });
-//<li id="loginLogOut"><a href="#/signup-login">/li>
-//
-
                 });
 
                 $('#registerButton').click(function () {
@@ -44,10 +41,10 @@ app.registerLoginView = (function () {
             console.log('logged out');
             //todo - this must be the controller!
             model.logoutUser()
-                .then(function(){
+                .then(function () {
                     $('#login-register').html('Sign up/Login');
                     location.replace('#/')
-                }, function(err){
+                }, function (err) {
                     console.log(err.responseText)
                 });
             //todo render the forms again

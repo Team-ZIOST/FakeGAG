@@ -7,29 +7,28 @@ app.userRequester = (function () {
 
     UserRequester.prototype.userRegister =
         function (username, email, password) {
-            var defer = Q.defer();
-            var data = {
-                'username': username,
-                'email': email,
-                'password': password
-            };
+            var defer = Q.defer(),
+                data = {
+                    'username': username,
+                    'email': email,
+                    'password': password
+                };
 
             app.baseRequest.makeRequest('POST', app.baseRequest.getUserHeaders(), 'https://api.parse.com/1/users', JSON.stringify(data))
                 .then(function (userData) {
-                    var dataRole = {
-                        "users": {
-                            "__op": "AddRelation",
-                            "objects": [
-                                {
-                                    "__type": "Pointer",
-                                    "className": "_User",
-                                    "objectId": userData.objectId
-                                }
-                            ]
-                        }
-                    };
-
-                    var url = app.constants.BASE_URL + 'roles/LGlTwmEecV';
+                    var url = app.constants.BASE_URL + 'roles/LGlTwmEecV',
+                        dataRole = {
+                            "users": {
+                                "__op": "AddRelation",
+                                "objects": [
+                                    {
+                                        "__type": "Pointer",
+                                        "className": "_User",
+                                        "objectId": userData.objectId
+                                    }
+                                ]
+                            }
+                        };
 
                     app.baseRequest.makeRequest('PUT', app.baseRequest.getUserHeaders(),
                         url, JSON.stringify(dataRole))
@@ -44,9 +43,10 @@ app.userRequester = (function () {
         };
 
     UserRequester.prototype.userLogout = function () {
-        var url = app.constants.BASE_URL + 'logout';
-        var headers = $.extend({}, app.constants.HEADERS);
-        var defer = Q.defer();
+        var url = app.constants.BASE_URL + 'logout',
+            headers = $.extend({}, app.constants.HEADERS),
+            defer = Q.defer();
+
         headers['X-Parse-Session-Token'] = sessionStorage['sessionToken'];
 
         app.baseRequest.makeRequest('POST', headers, url)
@@ -56,13 +56,13 @@ app.userRequester = (function () {
             }, function (err) {
                 defer.reject(err);
             });
+
         return defer.promise;
     };
 
-
     UserRequester.prototype.userLogin = function (username, password) {
-        var defer = Q.defer();
-        var url = app.constants.BASE_URL + 'login/?username=' + username + '&password=' + password;
+        var defer = Q.defer(),
+            url = app.constants.BASE_URL + 'login/?username=' + username + '&password=' + password;
 
         app.baseRequest.makeRequest('get', app.constants.HEADERS, url, null)
             .then(function (userData) {
@@ -79,10 +79,9 @@ app.userRequester = (function () {
     };
 
     UserRequester.prototype.updateProfile = function (newEmail, newPassword) {
-        var defer = Q.defer();
-        var data = {};
-
-        var userId = sessionStorage.userId;
+        var defer = Q.defer(),
+            data = {},
+            userId = sessionStorage.userId;
 
         if (newPassword) {
             data.password = newPassword;
