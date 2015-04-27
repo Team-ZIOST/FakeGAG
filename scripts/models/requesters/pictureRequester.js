@@ -60,6 +60,7 @@ app.pictureRequster = (function () {
         //  console.log(file.name)
         var pictureUploadHeaders = getPictureHeaders();
         var url = this._baseURL + 'classes/Photo/' + pictureId;
+
         var data = JSON.stringify({
             voters: {
                 "__op" : "AddUnique",

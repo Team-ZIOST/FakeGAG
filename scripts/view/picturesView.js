@@ -29,18 +29,22 @@ app.picturesView = (function () {
 
             $voteUpButton.click(function () {
                 if (!pictureData._voters.length || pictureData._voters.indexOf(sessionStorage.loggedUserId) == -1) {
-                    _this._requester.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, 1)
+                    pictureData._voters.push(sessionStorage.loggedUserId);
+
+                    _this._requester.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, ++pictureData._votes)
                         .then(function () {
-                            $voteCount.text('Rating: ' + ++pictureData._votes);
+                            $voteCount.text('Rating: ' + pictureData._votes);
                         });
                 }
             });
 
             $voteDownButton.click(function () {
                 if (!pictureData._voters.length || pictureData._voters.indexOf(sessionStorage.loggedUserId) == -1) {
-                    _this._requester.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, -1)
+                    pictureData._voters.push(sessionStorage.loggedUserId);
+
+                    _this._requester.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, --pictureData._votes)
                         .then(function () {
-                            $voteCount.text('Rating: ' + --pictureData._votes);
+                            $voteCount.text('Rating: ' + pictureData._votes);
                         });
                 }
             });
