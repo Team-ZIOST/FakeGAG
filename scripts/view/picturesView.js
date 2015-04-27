@@ -7,8 +7,8 @@ app.picturesView = (function () {
         this._requester = app.pictureRequster.load(app.constants.BASE_URL);
         var _this = this;
         data.forEach(function (pictureData) {
-            console.log(pictureData);
-            //var imageId = pictureData._objectId;
+            //console.log(pictureData);
+
             var $image = $('<img class="image" src="' + pictureData._pictureURL + '">');
             var $postedBy = $('<p class="postedBy">').text('Posted by: ' + pictureData._ownerName);
             var $download = $('<a href="' + pictureData._pictureURL + '" download>Download' + '</a>');
@@ -26,7 +26,6 @@ app.picturesView = (function () {
 
             $voteUpButton.click(function () {
                 _this._requester.updatePicture(++pictureData._votes, pictureData._objectId);
-
                 var votes = pictureData._votes;
 
                 $voteCount.text('Rating: ' + votes);
@@ -34,7 +33,6 @@ app.picturesView = (function () {
 
             $voteDownButton.click(function () {
                 _this._requester.updatePicture(--pictureData._votes, pictureData._objectId);
-
                 var votes = pictureData._votes;
 
                 $voteCount.text('Rating: ' + votes);
@@ -56,7 +54,6 @@ app.picturesView = (function () {
                 var id = $(this).parent().attr('id');
                 _this._commentController.addComment(commentContent, id, selector)
                     .then(function (data) {
-                        //console.log(data);
                         var commentId = data.objectId;
                         var authorName = sessionStorage['username'];
                         var authorId = sessionStorage['userId'];
@@ -64,24 +61,22 @@ app.picturesView = (function () {
                             authorName, id, _this._commentController, authorId);
                     }, function (err) {
                         console.log(err.responseText)
-                    })
-
+                    });
             });
 
-            $imageDivContainer.append($pictureTitle);
-            $imageDivContainer.append($image);
-            $imageDivContainer.append($voteCount);
-            $imageDivContainer.append($pictureDescription);
-            $imageDivContainer.append($postedBy);
-            $imageDivContainer.append($download);
-
-            $imageDivContainer.append($voteUpButton);
-            $imageDivContainer.append($voteDownButton);
+            $imageDivContainer.append($pictureTitle)
+                .append($image)
+                .append($voteCount)
+                .append($pictureDescription)
+                .append($postedBy)
+                .append($download);
 
             if (sessionStorage['userId']) {
                 $imageDivContainer.append($commentTextArea)
                     .append($addCommentButton)
-                    .append($getCommentButton);
+                    .append($getCommentButton)
+                    .append($voteUpButton)
+                    .append($voteDownButton);
             }
 
             if (sessionStorage['userId'] === pictureData._owner || sessionStorage['userType'] === 'Administrators') {
@@ -102,8 +97,7 @@ app.picturesView = (function () {
                 });
 
             $(selector).append($imageDivContainer);
-
-        })
+        });
     }
 
     return {
@@ -111,5 +105,4 @@ app.picturesView = (function () {
             return new PicturesView(data, selector, commentController);
         }
     }
-
 }());
