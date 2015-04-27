@@ -4,10 +4,12 @@ app.picturesView = (function () {
     function PicturesView(data, selector, commentController) {
         this._commentController = commentController;
         selector.empty();
+
+        // TODO switch with controller
         this._requester = app.pictureRequster.load(app.constants.BASE_URL);
         var _this = this;
+
         data.forEach(function (pictureData) {
-            //console.log(pictureData);
             var $image = $('<img class="image" src="' + pictureData._pictureURL + '">');
             var $postedBy = $('<p class="postedBy">').text('Posted by: ' + pictureData._ownerName);
             var $download = $('<a href="' + pictureData._pictureURL + '" download>Download' + '</a>');
@@ -21,20 +23,26 @@ app.picturesView = (function () {
             var $voteUpButton = $('<button>').text('+');
             var $voteDownButton = $('<button>').text('-');
             var $deleteCommentButton = $('<button>').text('Delete Comment');
-            var $voteCount = $('<span>').text('Rating: ' + pictureData._votes);
+            var $voteCount = $('<span>');
+
+            $voteCount.text('Rating: ' + pictureData._votes);
 
             $voteUpButton.click(function () {
-                _this._requester.updatePicture(++pictureData._votes, pictureData._objectId);
-                var votes = pictureData._votes;
-
-                $voteCount.text('Rating: ' + votes);
+                if (!pictureData._voters.length || pictureData._voters.indexOf(sessionStorage.loggedUserId) == -1) {
+                    _this._requester.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, 1)
+                        .then(function () {
+                            $voteCount.text('Rating: ' + ++pictureData._votes);
+                        });
+                }
             });
 
             $voteDownButton.click(function () {
-                _this._requester.updatePicture(--pictureData._votes, pictureData._objectId);
-                var votes = pictureData._votes;
-
-                $voteCount.text('Rating: ' + votes);
+                if (!pictureData._voters.length || pictureData._voters.indexOf(sessionStorage.loggedUserId) == -1) {
+                    _this._requester.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, -1)
+                        .then(function () {
+                            $voteCount.text('Rating: ' + --pictureData._votes);
+                        });
+                }
             });
 
             $deleteCommentButton.click(function () {
@@ -95,7 +103,7 @@ app.picturesView = (function () {
                     console.log(err)
                 });
 
-            $(selector).append($imageDivContainer);
+            selector.append($imageDivContainer);
         });
     }
 

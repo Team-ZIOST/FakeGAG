@@ -56,20 +56,25 @@ app.pictureRequster = (function () {
         return makeRequest('POST', pictureUploadHeaders, url, file);
     };
 
-    PictureRequester.prototype.updatePicture = function (votes, pictureId) {
+    PictureRequester.prototype.updatePicture = function (voterId, pictureId, votes) {
         //  console.log(file.name)
         var pictureUploadHeaders = getPictureHeaders();
         var url = this._baseURL + 'classes/Photo/' + pictureId;
         var data = JSON.stringify({
+            voters: {
+                "__op" : "AddUnique",
+                "objects": [voterId]
+            },
             votes: votes
         });
 
         return makeRequest('PUT', pictureUploadHeaders, url, data);
     };
 
+
     PictureRequester.prototype.getPictures = function () {
         //todo  check if this url must be here
-        var url = this._baseURL + 'classes/Photo/';
+        var url = this._baseURL + 'classes/Photo';
         var pictureRepoHeaders = getPictureRepoHeaders();
 
         return makeRequest('GET', pictureRepoHeaders, url, null);

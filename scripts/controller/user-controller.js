@@ -24,6 +24,7 @@ app.userController = (function () {
         this._model.login(username, password)
             .then(function (data) {
                 console.log(data.objectId);
+                sessionStorage.loggedUserId = data.objectId;
                 _this._model.takeUserRole(data.objectId)
                     .then(function (d) {
                         defer.resolve(d);
