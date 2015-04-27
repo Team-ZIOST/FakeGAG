@@ -56,6 +56,16 @@ app.pictureRequster = (function () {
         return makeRequest('POST', pictureUploadHeaders, url, file);
     };
 
+    PictureRequester.prototype.updatePicture = function (votes, pictureId) {
+        //  console.log(file.name)
+        var pictureUploadHeaders = getPictureHeaders();
+        var url = this._baseURL + 'classes/Photo/' + pictureId;
+        var data = JSON.stringify({
+            votes: votes
+        });
+        return makeRequest('PUT', pictureUploadHeaders, url, data);
+    };
+
     PictureRequester.prototype.getPictures = function () {
         //todo  check if this url must be here
         var url = this._baseURL + 'classes/Photo/';

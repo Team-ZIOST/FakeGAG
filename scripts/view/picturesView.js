@@ -19,8 +19,26 @@ app.picturesView = (function () {
             var $commentTextArea = $('<textarea id="comment">').text('Comment...');
             var $addCommentButton = $('<button id="add-comment">').text('Add Commment');
             var $getCommentButton = $('<button id="get-comment">').text('Show Comments');
+            var $voteUpButton = $('<button>').text('+');
+            var $voteDownButton = $('<button>').text('-');
             var $deleteCommentButton = $('<button>').text('Delete Comment');
-            var $voteCount = $('<span>').text('Rating ' +pictureData._votes);
+            var $voteCount = $('<span>').text('Rating: ' + pictureData._votes);
+
+            $voteUpButton.click(function () {
+                _this._requester.updatePicture(++pictureData._votes, pictureData._objectId);
+
+                var votes = pictureData._votes;
+
+                $voteCount.text('Rating: ' + votes);
+            });
+
+            $voteDownButton.click(function () {
+                _this._requester.updatePicture(--pictureData._votes, pictureData._objectId);
+
+                var votes = pictureData._votes;
+
+                $voteCount.text('Rating: ' + votes);
+            });
 
             $deleteCommentButton.click(function () {
                 var id;
@@ -56,6 +74,9 @@ app.picturesView = (function () {
             $imageDivContainer.append($pictureDescription);
             $imageDivContainer.append($postedBy);
             $imageDivContainer.append($download);
+
+            $imageDivContainer.append($voteUpButton);
+            $imageDivContainer.append($voteDownButton);
 
             if (sessionStorage['userId']) {
                 $imageDivContainer.append($commentTextArea)
