@@ -14,10 +14,9 @@ app.commentView = (function () {
         this._commentController = commentController;
 
         $commentDiv.append($commentText)
-        append($('<p>')
-            .text('Posted by: '))
-            .append($postedBy)
-            .appendTo($commentContainer);
+            .append($('<p>').text('Posted by: '))
+            .append($postedBy);
+         //   .append($commentContainer);
 
         var $commentDeleteButton = $('<button class="commentDelete">').text('Delete');
         var $commentEditButton = $('<button class="commentEdit">').text('Edit');
@@ -59,7 +58,9 @@ app.commentView = (function () {
             $commentDiv.append($commentEditButton);
         }
         console.log('added');
-        $('#' + containerId).append($commentContainer)
+        var $pictureContainer = $('#' + containerId);
+        $commentContainer.append($commentDiv);
+        $pictureContainer.append($commentContainer);
     }
 
     return {

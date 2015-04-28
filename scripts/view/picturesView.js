@@ -75,9 +75,16 @@ app.picturesView = (function () {
                     });
             });
 
-            // TODO fix
             $getCommentButton.click(function () {
-                _this._commentController.getComments($(this).attr('data-id'));
+                _this._commentController.getComments($(this).attr('data-id'))
+                    .then(function (data) {
+                        data.results.forEach(function (comment) {
+                            app.commentView.renderComments(comment.objectId, comment.content,
+                                comment.author.username, comment.photo.objectId, _this._commentController, comment.author.objectId)
+                        })
+                    }, function (error) {
+                        console.error(error.responseText)
+                    })
             });
 
             $imageDivContainer.append($pictureTitle)
@@ -86,7 +93,7 @@ app.picturesView = (function () {
                 .append($voteCount)
                 .append($pictureDescription)
                 .append($postedBy)
-                .append($getCommentButton);;
+                .append($getCommentButton);
 
             if (sessionStorage['userId']) {
                 $imageDivContainer.append($commentTextArea)
@@ -98,19 +105,6 @@ app.picturesView = (function () {
             if (sessionStorage['userId'] === pictureData._owner || sessionStorage['userType'] === 'Administrators') {
                 $imageDivContainer.append($removeImageButton);
             }
-
-            _this._commentController.getComments(pictureData._objectId, $imageDivContainer)
-                .then(function (data) {
-                    console.log(data);
-                    data.results.forEach(function (comment) {
-                        app.commentView.renderComments(comment.objectId, comment.content,
-                            comment.author.username, pictureData['_objectId'],
-                            _this._commentController, comment.author.objectId);
-                    })
-
-                }, function (err) {
-                    console.log(err)
-                });
 
             selector.append($imageDivContainer);
         });
