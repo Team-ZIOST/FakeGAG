@@ -114,6 +114,7 @@ app.picturesView = (function () {
                             $hideButton.attr('id', containerId + 'btn' );
                             $hideButton.click(function () {
                                 $(this).prev().remove();
+                                $(this).remove();
                             });
                             if($('#' + containerId + 'btn').length===0){
                                 $imageDivContainer.append($hideButton);
