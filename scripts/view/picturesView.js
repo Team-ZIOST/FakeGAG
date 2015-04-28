@@ -19,7 +19,7 @@ app.picturesView = (function () {
             var $imageDivContainer = $('<div class="imageContainer">').attr('id', pictureData._objectId);
             var $commentTextArea = $('<textarea id="comment">').text('Comment...');
             var $addCommentButton = $('<button id="add-comment" class="btn btn-default btn-sm">').text('Add Commment');
-            var $getCommentButton = $('<button id="get-comment" class="btn btn-default btn-sm">').text('Show Comments');
+            var $getCommentButton = $('<button id="get-comment" class="btn btn-default btn-sm">').text('Show Comments').attr('data-id', pictureData._objectId);
             var $voteUpButton = $('<button class="btn btn-default btn-sm">').html('<i class="fa fa-thumbs-o-up"></i>');
             var $voteDownButton = $('<button class="btn btn-default btn-sm">').html('<i class="fa fa-thumbs-o-down"></i>');
             var $deleteCommentButton = $('<button class="btn btn-default btn-sm">').text('Delete Comment');
@@ -75,19 +75,24 @@ app.picturesView = (function () {
                     });
             });
 
+            // TODO fix
+            $getCommentButton.click(function () {
+                _this._commentController.getComments($(this).attr('data-id'));
+            });
+
             $imageDivContainer.append($pictureTitle)
                 .append($image)
                 .append($voteCount)
                 .append($pictureDescription)
                 .append($postedBy)
-                .append($download);
+                .append($download)
+                .append($getCommentButton);;
 
             if (sessionStorage['userId']) {
                 $imageDivContainer.append($commentTextArea)
                     .append($voteUpButton)
                     .append($voteDownButton)
-                    .append($addCommentButton)
-                    .append($getCommentButton);
+                    .append($addCommentButton);
             }
 
             if (sessionStorage['userId'] === pictureData._owner || sessionStorage['userType'] === 'Administrators') {
