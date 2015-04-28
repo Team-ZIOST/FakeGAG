@@ -45,6 +45,7 @@ app.commentController = (function () {
                 defer.reject(err)
                 console.log(err.responseText);
             });
+
         return defer.promise;
     };
 
