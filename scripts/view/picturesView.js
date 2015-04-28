@@ -93,35 +93,30 @@ app.picturesView = (function () {
                     //todo create new div and then
                     .then(function (data) {
                         console.log(data)
-                        //if (data.results.length === 0) {
-                        //    Noty.error('There are no comments');
-                        //}
-                        //else {
+                        if (data.results.length === 0) {
+                            Noty.error('There are no comments');
+                        }
+                        else {
 
-                        var $commentsContainer = $('<div>');
-                        //  $
-                        var containerId = 'cont' + data.results[0].objectId;
-                        $commentsContainer.attr('id', containerId);
-                        data.results.forEach(function (comment) {
-                            console.log(comment);
-                            $imageDivContainer.append($commentsContainer);
+                            var $commentsContainer = $('<div>');
+                            var containerId = 'cont' + data.results[0].objectId;
+                            $commentsContainer.attr('id', containerId);
 
-                            //app.commentView.renderComments(comment.objectId, comment.content,
-                            //    comment.author.username, comment.photo.objectId, _this._commentController, comment.author.objectId);
-                            app.commentView.renderComments(comment.objectId, comment.content,
-                                comment.author.username, containerId, _this._commentController, comment.author.objectId);
+                            data.results.forEach(function (comment) {
 
+                                $imageDivContainer.append($commentsContainer);
+                                app.commentView.renderComments(comment.objectId, comment.content,
+                                    comment.author.username, containerId, _this._commentController, comment.author.objectId);
 
+                            });
 
-                        });
+                            var $hideButton = $('<button class="btn btn-default btn-sm">Hide Comments</button>');
+                            $hideButton.click(function () {
+                                $(this).prev().remove();
+                            });
 
-                        var $hideButton = $('<button class="btn btn-default btn-sm">Hide Comments</button>');
-                        $hideButton.click(function () {
-                             $(this).prev().remove();
-                        });
-
-                        $imageDivContainer.append($hideButton);
-                        //}
+                            $imageDivContainer.append($hideButton);
+                        }
                     }, function (error) {
                         console.error(error.responseText)
                     })
