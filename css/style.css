@@ -235,6 +235,10 @@ body {
 
 /*}*/
 
+p, h3 {
+    word-wrap: break-word;
+}
+
 .download {
     display: block;
 }
