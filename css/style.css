@@ -86,7 +86,7 @@ body {
     transform: translate3d(0, 100%, 0);
 }
 
-i {
+#mainNav i {
     font-size: 35px;
 }
 
@@ -196,10 +196,10 @@ i {
     background-color: rgba(204, 204, 204, 0.25);
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 5px;
-    padding: 10px;
     width: 31%;
     display: inline-block;
     /*float: left;*/
+    padding: 10px;
     margin: 10px;
     /*vertical-align: top;*/
     vertical-align: middle;
@@ -222,9 +222,9 @@ i {
     padding: 10px;
 }
 
-/*.rating {*/
+.rating {
 
-/*}*/
+}
 
 /*.pictureDescription {*/
 
@@ -234,9 +234,9 @@ i {
 
 /*}*/
 
-/*.download {*/
-
-/*}*/
+.download {
+    display: block;
+}
 
 textarea {
     resize: none;

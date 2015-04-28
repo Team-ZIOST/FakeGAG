@@ -23,7 +23,7 @@ app.picturesView = (function () {
             var $voteUpButton = $('<button class="btn btn-default btn-sm">').html('<i class="fa fa-thumbs-o-up"></i>');
             var $voteDownButton = $('<button class="btn btn-default btn-sm">').html('<i class="fa fa-thumbs-o-down"></i>');
             var $deleteCommentButton = $('<button class="btn btn-default btn-sm">').text('Delete Comment');
-            var $voteCount = $('<span class="rating">');
+            var $voteCount = $('<div class="rating">');
 
             $voteCount.text('Rating: ' + pictureData._votes);
 
@@ -82,10 +82,10 @@ app.picturesView = (function () {
 
             $imageDivContainer.append($pictureTitle)
                 .append($image)
+                .append($download)
                 .append($voteCount)
                 .append($pictureDescription)
                 .append($postedBy)
-                .append($download)
                 .append($getCommentButton);;
 
             if (sessionStorage['userId']) {

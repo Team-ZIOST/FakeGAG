@@ -1,15 +1,38 @@
-<!--<label for="file">Upload: </label>-->
-<input id="file" type="file"/>
-<label for="title">Picture Title</label>
-<input id="title" type="text"/>
-<label for="caption">Caption</label>
-<input id="caption" type="text"/>
-<select id="category">
-    <option value="animals">Animals</option>
-    <option value="sports">Sports</option>
-    <option value="boobies">Boobies</option>
-    <option value="cars">Cars</option>
-    <option value="other">Other</option>
-</select>
-<button id="upload">Upload</button>
-<!--<button id="getPics">getPics</button>-->
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-login">
+        <div class="panel panel-heading">
+            <a class="active">Upload Image</a>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <input class="" id="file" type="file"/>
+            </div>
+            <!--<label for="title">Picture Title</label>-->
+            <div class="form-group">
+                <input class="form-control" id="title" type="text" placeholder="Picture Title"/>
+            </div>
+            <!--<label for="caption">Caption</label>-->
+            <div class="form-group">
+                <input class="form-control" id="caption" type="text" placeholder="Caption"/>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Select category:</label>
+                <select id="category" class="selectpicker show-tick">
+                    <option value="animals">Animals</option>
+                    <option value="sports">Sports</option>
+                    <option value="boobies">Boobies</option>
+                    <option value="cars">Cars</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button id="upload" class="form-control btn btn-register">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.selectpicker').selectpicker();
+</script>
