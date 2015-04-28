@@ -23,7 +23,7 @@ app.pictureController = (function () {
 
         this._model.showTopTenPictures()
             .then(function (data) {
-                app.picturesView.load(data, selector, _this._commentController);
+                app.picturesView.load(data, selector, _this._commentController, _this);
             }, function (err) {
                 console.error(err)
             })
