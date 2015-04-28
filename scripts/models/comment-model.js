@@ -35,18 +35,18 @@ app.commentModel = (function () {
     };
 
     Comment.prototype.getComments = function (id, selector) {
-        var defer = Q.defer(),
+        //var defer = Q.defer(),
             url = this._serviseUrl + '?where={"photo": { "__type": "Pointer","className": "Photo",   "objectId": "' + id + '"}}&include=photo,author';
 
-        app.baseRequest.makeRequest('GET', app.constants.HEADERS, url, {})
-            .then(function (data) {
-                defer.resolve(data);
-            }, function (err) {
-                defer.reject(err);
-                console.log(err);
-            });
+        return app.baseRequest.makeRequest('GET', app.constants.HEADERS, url, {});
+            //.then(function (data) {
+            //    defer.resolve(data);
+            //}, function (err) {
+            //    defer.reject(err);
+            //    console.log(err);
+            //});
 
-        return defer.promise;
+        //return defer.promise;
     };
 
     Comment.prototype.deleteComment = function (id) {
