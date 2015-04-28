@@ -101,7 +101,7 @@ app.picturesView = (function () {
                             var $commentsContainer = $('<div>');
                             var containerId = 'cont' + data.results[0].objectId;
                             $commentsContainer.attr('id', containerId);
-
+                            $commentsContainer.empty();
                             data.results.forEach(function (comment) {
 
                                 $imageDivContainer.append($commentsContainer);
@@ -111,11 +111,13 @@ app.picturesView = (function () {
                             });
 
                             var $hideButton = $('<button class="btn btn-default btn-sm">Hide Comments</button>');
+                            $hideButton.attr('id', containerId + 'btn' );
                             $hideButton.click(function () {
                                 $(this).prev().remove();
                             });
-
-                            $imageDivContainer.append($hideButton);
+                            if($('#' + containerId + 'btn').length===0){
+                                $imageDivContainer.append($hideButton);
+                            }
                         }
                     }, function (error) {
                         console.error(error.responseText)
