@@ -12,4 +12,5 @@ var Picture = (function () {
     }
 
     return Picture;
+
 }());

@@ -91,12 +91,12 @@ app.userRequester = (function () {
             data.email = newEmail;
         }
 
-        app.baseRequest.makeRequest('PUT', app.baseRequest.getUserHeaders(), 'https://api.parse.com/1/users/' + userId, JSON.stringify(data))
-            .then(function (userData) {
-                // TODO render notification for success
-            });
+      return  app.baseRequest.makeRequest('PUT', app.baseRequest.getUserHeaders(), 'https://api.parse.com/1/users/' + userId, JSON.stringify(data))
+            //.then(function (userData) {
+            //    // TODO render notification for success
+            //});
 
-        return defer.promise;
+
     };
 
     return {

@@ -62,9 +62,7 @@ app.pictureRepoModel = (function () {
                         voters = pictureData.voters ? pictureData.voters : [],
                         ownerName = pictureData.ownerName,
                         picture = new Picture(objectId, title, caption, pictureUrl, votes, voters, category, owner, ownerName);
-                    //console.log(picture)
-                    //pointer owner
-                    //todo this fields
+
                     _this.pictureRepo.push(picture);
                 });
 

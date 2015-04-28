@@ -1,12 +1,11 @@
 var app = app || {};
 
 app.picturesView = (function () {
-    function PicturesView(data, selector, commentController) {
+    function PicturesView(data, selector, commentController, pictureController) {
         this._commentController = commentController;
+        this._pictureController = pictureController;
         selector.empty();
 
-        // TODO switch with controller
-        this._requester = app.pictureRequster.load(app.constants.BASE_URL);
         var _this = this;
 
         data.forEach(function (pictureData) {
@@ -31,7 +30,7 @@ app.picturesView = (function () {
                 if (!pictureData._voters.length || pictureData._voters.indexOf(sessionStorage.loggedUserId) == -1) {
                     pictureData._voters.push(sessionStorage.loggedUserId);
 
-                    _this._requester.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, ++pictureData._votes)
+                    _this._pictureController.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, ++pictureData._votes)
                         .then(function () {
                             $voteCount.text('Rating: ' + pictureData._votes);
                         });
@@ -42,7 +41,7 @@ app.picturesView = (function () {
                 if (!pictureData._voters.length || pictureData._voters.indexOf(sessionStorage.loggedUserId) == -1) {
                     pictureData._voters.push(sessionStorage.loggedUserId);
 
-                    _this._requester.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, --pictureData._votes)
+                    _this._pictureController.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, --pictureData._votes)
                         .then(function () {
                             $voteCount.text('Rating: ' + pictureData._votes);
                         });
@@ -56,8 +55,13 @@ app.picturesView = (function () {
 
             $removeImageButton.click(function () {
                 var id = $(this).parent().attr('id');
-                _this._requester.deletePicture(id);
-                $("#" + id).remove();
+                _this._pictureController.deletePicture(id)
+                    .then(function (data) {
+                        $("#" + id).remove();
+                    }, function (error) {
+                        console.log(error.responseText)
+                    });
+
             });
 
             $addCommentButton.click(function () {
@@ -111,8 +115,8 @@ app.picturesView = (function () {
     }
 
     return {
-        load: function (data, selector, commentController) {
-            return new PicturesView(data, selector, commentController);
+        load: function (data, selector, commentController, pictureController) {
+            return new PicturesView(data, selector, commentController, pictureController);
         }
     }
 }());

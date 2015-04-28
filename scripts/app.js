@@ -3,17 +3,18 @@ var app = app || {};
 (function () {
 
     app.router = Sammy(function () {
-        //todo clean up this mess
+
         if (sessionStorage['userId']) {
             $('#loginLogOut').html('<a href="#/signup-login"><i class="pe-7s-key"></i><span class="menuspan" id="login-register">Log out</span></a>')
         }
 
         var $selector = $('#wrapper');
         var pictureRepoModel = app.pictureRepoModel.load(app.constants.BASE_URL);
+        var pictureRequester = app.pictureRequster.load(app.constants.BASE_URL);
         var userModel = app.userModel.load();
         var commentModel = app.commentModel.load(app.constants.BASE_URL);
         var commentController = app.commentController.load(commentModel);
-        var pictureController = app.pictureController.load(pictureRepoModel, commentController);
+        var pictureController = app.pictureController.load(pictureRepoModel, commentController, pictureRequester);
         var userController = app.userController.load(userModel);
         //end invoking controllers
 

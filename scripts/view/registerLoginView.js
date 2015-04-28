@@ -12,16 +12,16 @@ app.registerLoginView = (function () {
                     var password = $('[name="password-login"]').val();
                     model.loginUser(username, password)
                         .then(function () {
+                            Noty.success("Welcome");
                             $('#login-register').html('Log Out');
                             location.replace('#/')
 
                         }, function (err) {
-                            console.log(err.responseText);
+                            Noty.error(err.responseText);
                         });
                 });
 
                 $('#registerButton').click(function () {
-                    console.log('register');
                     var regUsername = $('[name="username"]').val();
                     var regPassWord = $('[name="password"]').val();
                     var regRepeatedPassword = $('[name="repeat-password"]').val();
@@ -29,6 +29,12 @@ app.registerLoginView = (function () {
                     //todo validation, maybe code reuse
                     ///todo include values in the function
                     model.registerUser(regUsername, regEmail, regPassWord)
+                        .then(function (data) {
+                            Noty.success("Register successful, please login");
+                        }, function (error) {
+                            Noty.error(error.responseText);
+                        })
+
                 });
             });
     }
@@ -38,16 +44,15 @@ app.registerLoginView = (function () {
         //todo remove the logOutButton form here :)
         var $logOutButton = $('#loginLogOut');
         $logOutButton.click(function () {
-            console.log('logged out');
             //todo - this must be the controller!
             model.logoutUser()
                 .then(function () {
+                    Noty.success("Good Bye!");
                     $('#login-register').html('Sign up/Login');
                     location.replace('#/')
                 }, function (err) {
-                    console.log(err.responseText)
+                    Noty.error(err.responseText)
                 });
-            //todo render the forms again
         });
     }
 

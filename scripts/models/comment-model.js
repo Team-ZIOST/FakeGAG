@@ -32,28 +32,6 @@ app.commentModel = (function () {
             });
 
         return defer.promise;
-
-        //.then(function (d) {
-        //    var dataPut = JSON.stringify({
-        //        'author': {
-        //            "__type": "Pointer",
-        //            "className": "_User",
-        //            "objectId": sessionStorage['userId']
-        //
-        //        },
-        //        'photo': {
-        //            "__type": "Pointer",
-        //            "className": "Photo",
-        //            "objectId": photoId
-        //        }
-        //    });
-        //    app.baseRequest.makeRequest('PUT', app.constants.HEADERS, url + d.objectId, dataPut)
-        //
-        //
-        //}, function (err) {
-        //    console.log(err);
-        //});
-        //return defer.promise;
     };
 
     Comment.prototype.getComments = function (id, selector) {
@@ -61,10 +39,8 @@ app.commentModel = (function () {
             url = this._serviseUrl + '?where={"photo": { "__type": "Pointer","className": "Photo",   "objectId": "' + id + '"}}&include=photo,author';
 
         app.baseRequest.makeRequest('GET', app.constants.HEADERS, url, {})
-            .then(function (d) {
-                //console.log(d)
-                defer.resolve(d);
-                //app.commentView.renderComments(d, selector)
+            .then(function (data) {
+                defer.resolve(data);
             }, function (err) {
                 defer.reject(err);
                 console.log(err);
@@ -109,4 +85,5 @@ app.commentModel = (function () {
             return new Comment();
         }
     }
+
 }());

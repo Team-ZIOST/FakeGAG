@@ -25,40 +25,26 @@ app.userController = (function () {
             .then(function (data) {
                 console.log(data.objectId);
                 sessionStorage.loggedUserId = data.objectId;
-                _this._model.takeUserRole(data.objectId)
+              return  _this._model.takeUserRole(data.objectId)
                     .then(function (d) {
                         defer.resolve(d);
-                        console.log('login complete');
                     }, function (error) {
                         defer.reject(error);
-                        console.log(error.responseText);
                     });
 
-                //todo render to do view
             }, function (error) {
+                defer.reject(error);
                 console.log(error.responseText)
             });
         return defer.promise;
     };
 
     UserController.prototype.registerUser = function (username, email, password) {
-        this._model.register(username, email, password)
-            .then(function (data) {
-                console.log(data);
-                //todo DOM manipulation
-            }, function (error) {
-                console.log(error.responseText)
-            });
+        return this._model.register(username, email, password);
     };
 
     UserController.prototype.updateProfile = function (email, password) {
-        this._model.updateProfile(email, password)
-            .then(function (data) {
-                console.log(data);
-                //todo DOM manipulation
-            }, function (error) {
-                console.log(error.responseText)
-            });
+        return this._model.updateProfile(email, password);
     };
 
     UserController.prototype.logoutUser = function () {
@@ -67,8 +53,6 @@ app.userController = (function () {
             .then(function (data) {
                 sessionStorage.clear();
                 defer.resolve(data);
-                //todo dom manipulations
-
             }, function (error) {
                 defer.reject(error);
             });

@@ -1,9 +1,7 @@
 var app = app || {};
 
 app.uploadView = (function () {
-    //login-register - fixed
 
-    //todo what the fuck controller
     function uploadViewPage($selector, controller) {
         var _this = this;
 
@@ -20,18 +18,16 @@ app.uploadView = (function () {
                 var caption = $('#caption').val();
                 var category = $("#category option:selected").text();
 
-                //var picRequester = app.pictureRequster.load(app.constants.BASE_URL);
                 if (app.constants.SUPPORTED_FORMATS.indexOf(file.type) !== -1) {
 
                     _this._model.uploadPicture(file, title, caption, category)
                         .then(function (data) {
-                            console.log(data);
+                           Noty.success('Upload complete!');
                             location.replace('#/');
                         }, function (err) {
-                            console.log(err)
+                            Noty.error(err.responseText);
                         });
                 }
-                //app.router._Sammy.redirect('#/');
             });
         });
     }
@@ -39,4 +35,5 @@ app.uploadView = (function () {
     return {
         loadUploadPage: uploadViewPage
     }
+
 }());

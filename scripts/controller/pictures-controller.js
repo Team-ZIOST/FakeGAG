@@ -1,8 +1,9 @@
 var app = app || {};
 
 app.pictureController = (function () {
-    function PictureController(model, commentController) {
+    function PictureController(model, commentController, pictureRequester) {
         this._model = model;
+        this._requester = pictureRequester;
         this._commentController = commentController;
     }
 
@@ -11,7 +12,7 @@ app.pictureController = (function () {
 
         this._model.showAllPictures()
             .then(function (data) {
-                app.picturesView.load(data, selector, _this._commentController);
+                app.picturesView.load(data, selector, _this._commentController, _this);
             }, function (err) {
                 console.error(err)
             })
@@ -54,7 +55,7 @@ app.pictureController = (function () {
                     }, function (err) {
                         console.log(err);
                         defer.reject(err);
-                    })
+                    });
             }, function (err) {
                 console.error(err.responseText)
             });
@@ -70,9 +71,17 @@ app.pictureController = (function () {
         app.categoryView.loadCategoryView(selector, this);
     };
 
+    PictureController.prototype.updatePicture = function (userId, pictureId, votes) {
+        return this._requester.updatePicture(userId, pictureId, votes)
+    };
+
+    PictureController.prototype.deletePicture = function (id) {
+        return this._requester.deletePicture(id);
+    };
+
     return {
-        load: function (model, commentController) {
-            return new PictureController(model, commentController);
+        load: function (model, commentController, pictureRequester) {
+            return new PictureController(model, commentController, pictureRequester);
         }
     }
 }());
