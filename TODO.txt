@@ -1,9 +1,0 @@
-1. Users/roles: (admin , regular);
-2. Category: (name)
-3. Photo: (pointer -> user, title, votes, caption, picture[file]);
-4. Comment:  (user, pointer -> photo)
-
-//front  - home (all), hot,  trending (vote = today)
-
-admin panel, search bar
-MVC sammy, moustache?, noty, jquery, lodash?, Q, owl?,require,
