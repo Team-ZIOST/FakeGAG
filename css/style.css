@@ -100,7 +100,6 @@ body {
     cursor: pointer;
 }
 
-/*login and register forms style*/
 .panel-login {
     border-color: #ccc;
     -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
@@ -196,12 +195,10 @@ body {
     background-color: rgba(204, 204, 204, 0.25);
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 5px;
-    width: 31%;
+    width: 360px;
     display: inline-block;
-    /*float: left;*/
     padding: 10px;
     margin: 10px;
-    /*vertical-align: top;*/
     vertical-align: middle;
     box-sizing: border-box;
     text-align: center;
@@ -226,14 +223,6 @@ body {
 .rating {
 
 }
-
-/*.pictureDescription {*/
-
-/*}*/
-
-/*.postedBy {*/
-
-/*}*/
 
 p, h3 {
     word-wrap: break-word;
