@@ -8,13 +8,14 @@ app.userRequester = (function () {
     UserRequester.prototype.userRegister =
         function (username, email, password) {
             var defer = Q.defer(),
+                headers = app.baseRequest.getUserHeaders(),
                 data = {
                     'username': username,
                     'email': email,
                     'password': password
                 };
 
-            app.baseRequest.makeRequest('POST', app.baseRequest.getUserHeaders(), 'https://api.parse.com/1/users', JSON.stringify(data))
+            app.baseRequest.makeRequest('POST', headers, 'https://api.parse.com/1/users', JSON.stringify(data))
                 .then(function (userData) {
                     var url = app.constants.BASE_URL + 'roles/LGlTwmEecV',
                         dataRole = {
@@ -30,8 +31,7 @@ app.userRequester = (function () {
                             }
                         };
 
-                    app.baseRequest.makeRequest('PUT', app.baseRequest.getUserHeaders(),
-                        url, JSON.stringify(dataRole))
+                    app.baseRequest.makeRequest('PUT', headers, url, JSON.stringify(dataRole))
                         .then(function (data) {
                             defer.resolve(data);
                         }, function (data) {
@@ -72,7 +72,6 @@ app.userRequester = (function () {
                 defer.resolve(userData)
             }, function (error) {
                 defer.reject(error);
-                console.log(error.responseText);
             });
 
         return defer.promise;
@@ -91,12 +90,14 @@ app.userRequester = (function () {
             data.email = newEmail;
         }
 
-      return  app.baseRequest.makeRequest('PUT', app.baseRequest.getUserHeaders(), 'https://api.parse.com/1/users/' + userId, JSON.stringify(data))
-            //.then(function (userData) {
-            //    // TODO render notification for success
-            //});
+        app.baseRequest.makeRequest('PUT', app.baseRequest.getUserHeaders(), 'https://api.parse.com/1/users/' + userId, JSON.stringify(data))
+            .then(function (userData) {
+                defer.resolve(userData);
+            }, function (error) {
+                defer.reject(error);
+            });
 
-
+        return defer.promise;
     };
 
     return {
