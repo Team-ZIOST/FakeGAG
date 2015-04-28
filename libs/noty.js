@@ -1,17 +1,15 @@
-var Noty = (function() {
+var Noty = (function () {
 
     function display(type, text, time) {
         var n = noty({
             text: text,
             type: type,
             closeWith: ['click'],
-            //type: 'alert',
-           // open: 'animated bounceInLeft',
             dismissQueue: true,
             layout: 'topCenter',
-            theme: 'defaultTheme',
+            theme: 'Animated',
             maxVisible: 10
-           // timeout: time
+            // timeout: time
         });
     }
 
