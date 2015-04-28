@@ -239,6 +239,14 @@ p, h3 {
     word-wrap: break-word;
 }
 
+p {
+    margin: 4px;
+}
+
+.bottomBorder {
+    border-bottom: #ccc;
+}
+
 .download {
     display: block;
 }
