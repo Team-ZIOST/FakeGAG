@@ -34,7 +34,7 @@ app.userController = (function () {
 
             }, function (error) {
                 defer.reject(error);
-                console.log(error.responseText)
+                //console.log(error.responseText)
             });
         return defer.promise;
     };

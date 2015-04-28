@@ -17,8 +17,7 @@ app.registerLoginView = (function () {
                             location.replace('#/')
 
                         }, function (err) {
-                          //  console.log(JSON.stringify(err));
-                            Noty.error(err.responseText);
+                            Noty.error(err.responseJSON.error);
                         });
                 });
 
@@ -32,7 +31,7 @@ app.registerLoginView = (function () {
                             .then(function (data) {
                                 Noty.success("Register successful, please login");
                             }, function (error) {
-                                Noty.error(error.responseText);
+                                Noty.error(err.responseJSON.error);
                             })
                     } else {
                         Noty.error('Passwords not match!')
