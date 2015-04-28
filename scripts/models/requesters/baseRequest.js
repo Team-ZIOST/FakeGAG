@@ -3,6 +3,7 @@ var app = app || {};
 app.baseRequest = (function () {
     function makeRequest(method, headers, url, data) {
         var defer = Q.defer();
+
         $.ajax({
             method: method,
             headers: headers,
@@ -24,10 +25,6 @@ app.baseRequest = (function () {
         var pictureHeaders = $.extend({}, app.constants.HEADERS);
         pictureHeaders['Content-Type'] = 'file.type';
 
-        //todo
-        //if (sessionStorage['logged-in']) {
-        //    headers['X-Parse-Session-Token'] = sessionStorage['logged-in'];
-        //}
         return pictureHeaders;
     }
 
@@ -35,10 +32,6 @@ app.baseRequest = (function () {
         var picRepoHeaders = $.extend({}, app.constants.HEADERS);
         picRepoHeaders['Content-Type'] = 'application/json';
 
-        //todo
-        //if (sessionStorage['logged-in']) {
-        //    headers['X-Parse-Session-Token'] = sessionStorage['logged-in'];
-        //}
         return picRepoHeaders;
     }
 

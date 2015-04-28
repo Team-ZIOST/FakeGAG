@@ -7,7 +7,6 @@ app.commentController = (function () {
 
     CommentController.prototype.addComment = function (comment, id) {
         var defer = Q.defer();
-        var _this = this;
 
         this._model.addComment(comment, id)
             .then(function (data) {
@@ -21,7 +20,6 @@ app.commentController = (function () {
 
     CommentController.prototype.getComments = function (id, $selector) {
         var defer = Q.defer();
-        var _this = this;
 
         this._model.getComments(id, $selector)
             .then(function (data) {
@@ -35,6 +33,7 @@ app.commentController = (function () {
 
     CommentController.prototype.deleteComment = function (id) {
         var defer = Q.defer();
+
         this._model.deleteComment(id)
             .then(function (data) {
                 defer.resolve(data);
@@ -47,6 +46,7 @@ app.commentController = (function () {
 
     CommentController.prototype.editComment = function (id, data) {
         var defer = Q.defer();
+
         this._model.editComment(id, data)
             .then(function (data) {
                 defer.resolve(data);

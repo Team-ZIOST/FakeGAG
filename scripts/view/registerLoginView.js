@@ -26,16 +26,23 @@ app.registerLoginView = (function () {
                     var regPassWord = $('[name="password"]').val();
                     var regRepeatedPassword = $('[name="repeat-password"]').val();
                     var regEmail = $('[name="email"]').val();
-                    if (regPassWord === regRepeatedPassword) {
-                        model.registerUser(regUsername, regEmail, regPassWord)
-                            .then(function (data) {
-                                Noty.success("Register successful, please login");
-                            }, function (error) {
-                                Noty.error(err.responseJSON.error);
-                            })
+
+                    if(regUsername && regEmail && regPassWord && regRepeatedPassword) {
+                        if (regPassWord === regRepeatedPassword) {
+                            model.registerUser(regUsername, regEmail, regPassWord)
+                                .then(function (data) {
+                                    Noty.success("Register successful, please login");
+                                }, function (error) {
+                                    Noty.error(err.responseJSON.error);
+                                })
+                        } else {
+                            Noty.error('Passwords not match!')
+                        }
                     } else {
-                        Noty.error('Passwords not match!')
+                        Noty.error('All fields are required!')
                     }
+
+
 
                 });
 

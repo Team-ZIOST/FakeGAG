@@ -18,24 +18,24 @@ app.userController = (function () {
     };
 
     UserController.prototype.loginUser = function (username, password) {
-        var _this = this;
-        var defer = Q.defer();
+        var _this = this,
+            defer = Q.defer();
 
         this._model.login(username, password)
             .then(function (data) {
-                console.log(data.objectId);
                 sessionStorage.loggedUserId = data.objectId;
+
                 _this._model.takeUserRole(data.objectId)
                     .then(function (d) {
-                    defer.resolve(d);
-                }, function (error) {
-                    defer.reject(error);
-                });
+                        defer.resolve(d);
+                    }, function (error) {
+                        defer.reject(error);
+                    });
 
             }, function (error) {
                 defer.reject(error);
-                //console.log(error.responseText)
             });
+
         return defer.promise;
     };
 
@@ -49,6 +49,7 @@ app.userController = (function () {
 
     UserController.prototype.logoutUser = function () {
         var defer = Q.defer();
+
         this._model.logout()
             .then(function (data) {
                 sessionStorage.clear();

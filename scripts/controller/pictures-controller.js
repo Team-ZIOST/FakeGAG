@@ -15,7 +15,7 @@ app.pictureController = (function () {
                 app.picturesView.load(data, selector, _this._commentController, _this);
             }, function (err) {
                 console.error(err)
-            })
+            });
     };
 
     PictureController.prototype.renderTopTenPictures = function (selector) {
@@ -26,13 +26,15 @@ app.pictureController = (function () {
                 app.picturesView.load(data, selector, _this._commentController, _this);
             }, function (err) {
                 console.error(err)
-            })
+            });
     };
 
     PictureController.prototype.renderPicturesByCategory = function ($selector, category) {
+        var defer = Q.defer(),
+            _this = this;
+
         $selector.empty();
-        var defer = Q.defer();
-        var _this = this;
+
         this._model.showPicturesByCategory(category)
             .then(function (data) {
                 app.picturesView.load(data, $selector, _this._commentController, _this);
@@ -44,8 +46,8 @@ app.pictureController = (function () {
     };
 
     PictureController.prototype.uploadPicture = function (file, title, caption, category, ownerName) {
-        var defer = Q.defer();
-        var _this = this;
+        var defer = Q.defer(),
+            _this = this;
 
         this._model._requester.uploadPicture(file)
             .then(function (data) {
@@ -53,11 +55,10 @@ app.pictureController = (function () {
                     .then(function (data) {
                         defer.resolve(data);
                     }, function (err) {
-                        console.log(err);
                         defer.reject(err);
                     });
             }, function (err) {
-                console.error(err.responseText)
+                Noty.error(err.responseJSON.error);
             });
 
         return defer.promise;
