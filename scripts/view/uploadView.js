@@ -18,15 +18,24 @@ app.uploadView = (function () {
                 var caption = $('#caption').val();
                 var category = $("#category option:selected").text();
 
-                if (app.constants.SUPPORTED_FORMATS.indexOf(file.type) !== -1) {
+                if (title && caption && file) {
+                    if (app.constants.SUPPORTED_FORMATS.indexOf(file.type) !== -1) {
 
-                    _this._model.uploadPicture(file, title, caption, category)
-                        .then(function (data) {
-                           Noty.success('Upload complete!');
-                            location.replace('#/');
-                        }, function (err) {
-                            Noty.error(err.responseText);
-                        });
+                        _this._model.uploadPicture(file, title, caption, category)
+                            .then(function (data) {
+                                Noty.success('Upload complete!');
+                                location.replace('#/');
+                            }, function (err) {
+                                Noty.error(err.responseText);
+                            });
+                    }
+                    else {
+                        Noty.error('Invalid picture type');
+                    }
+                }
+
+                else {
+                    Noty.error('Please complete all fileds')
                 }
             });
         });

@@ -16,7 +16,7 @@ app.picturesView = (function () {
             var $pictureDescription = $('<h2 class="pictureDescription">').text(pictureData._caption);
             var $removeImageButton = $('<button class="removeButton btn btn-default btn-sm">').text("Remove");
             var $imageDivContainer = $('<div class="imageContainer">').attr('id', pictureData._objectId);
-            var $commentTextArea = $('<textarea id="comment">').text('Comment...');
+            var $commentTextArea = $('<textarea id="comment">').attr('placeholder', 'Comment...');
             var $addCommentButton = $('<button id="add-comment" class="btn btn-default btn-sm">').text('Add Commment');
             var $getCommentButton = $('<button id="get-comment" class="btn btn-default btn-sm">').text('Show Comments').attr('data-id', pictureData._objectId);
             var $voteUpButton = $('<button class="btn btn-default btn-sm">').html('<i class="fa fa-thumbs-o-up"></i>');
@@ -66,17 +66,24 @@ app.picturesView = (function () {
 
             $addCommentButton.click(function () {
                 var commentContent = $commentTextArea.val();
-                var id = $(this).parent().attr('id');
-                _this._commentController.addComment(commentContent, id, selector)
-                    .then(function (data) {
-                        var commentId = data.objectId;
-                        var authorName = sessionStorage['username'];
-                        var authorId = sessionStorage['userId'];
-                        app.commentView.renderComments(commentId, commentContent,
-                            authorName, id, _this._commentController, authorId);
-                    }, function (err) {
-                        console.log(err.responseText)
-                    });
+
+                if (!commentContent) {
+                    Noty.error('Comment cannot be empty!')
+
+                } else {
+
+                    var id = $(this).parent().attr('id');
+                    _this._commentController.addComment(commentContent, id, selector)
+                        .then(function (data) {
+                            var commentId = data.objectId;
+                            var authorName = sessionStorage['username'];
+                            var authorId = sessionStorage['userId'];
+                            app.commentView.renderComments(commentId, commentContent,
+                                authorName, id, _this._commentController, authorId);
+                        }, function (err) {
+                            console.log(err.responseText)
+                        });
+                }
             });
 
             $getCommentButton.click(function () {

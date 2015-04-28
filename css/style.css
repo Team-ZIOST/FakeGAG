@@ -6,6 +6,7 @@ body {
     font-family: 'Raleway', Arial, sans-serif;
 }
 
+
 #navbar {
     margin: 0 0 20px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -32,7 +33,6 @@ body {
 .nav > li:focus {
     outline: none;
 }
-
 
 .nav > li > a {
     color: #2CC185;
@@ -70,7 +70,7 @@ body {
 }
 
 #mainNav > li > a::after {
-/*a::after {*/
+    /*a::after {*/
     position: absolute;
     top: 0;
     left: 0;
@@ -205,7 +205,7 @@ body {
     vertical-align: middle;
     box-sizing: border-box;
     text-align: center;
-    box-shadow: 0 25px 10px -15px rgba(0,0,0,0.05);
+    box-shadow: 0 25px 10px -15px rgba(0, 0, 0, 0.05);
 }
 
 .imageContainer > button {
@@ -246,38 +246,42 @@ textarea {
     width: 100%;
 }
 
-@-ms-viewport{
-	width: device-width;
+@-ms-viewport {
+    width: device-width;
 }
 
 @media all and (max-width: 1200px) {
-	#navbar .container {
-		width: 600px;
-	}
+    #navbar .container {
+        width: 600px;
+    }
 }
 
 @media all and (max-width: 770px) {
-	#navbar .container ul li {
-		float: left;
-	}
-	.navbar-nav {
-	  margin: 0 0;
-	}
+    #navbar .container ul li {
+        float: left;
+    }
+
+    .navbar-nav {
+        margin: 0 0;
+    }
 }
+
 @media all and (max-width: 600px) {
-	#navbar .container ul li {
-		float: left;
-	}
-	#navbar .container {
-		width: 500px;
-	}
-	.nav {
-		padding-left: 40px;
-	}
+    #navbar .container ul li {
+        float: left;
+    }
+
+    #navbar .container {
+        width: 500px;
+    }
+
+    .nav {
+        padding-left: 40px;
+    }
 }
 
 @media all and (max-width: 480px) {
-	.nav {
-		padding-left: 10px;
-	}
+    .nav {
+        padding-left: 10px;
+    }
 }

@@ -12,7 +12,8 @@ app.updateProfileView = (function () {
             $('#updateButton').click(function () {
                 var username = $('#email').val();
                 var password = $('#password').val();
-
+                var repeatPassword = $('#confirm-password').val();
+                if(password === repeatPassword){
                 controller.updateProfile(username, password)
                     .then(function () {
                         Noty.success('Updated Profile!');
@@ -20,6 +21,9 @@ app.updateProfileView = (function () {
                         console.log(err.responseText);
                         Noty.error(err.responseText)
                     });
+                }else{
+                    Noty.error('New passwords not match!');
+                }
             });
         });
     }

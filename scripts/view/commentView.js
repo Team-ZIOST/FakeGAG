@@ -16,7 +16,7 @@ app.commentView = (function () {
         $commentDiv.append($commentText)
             .append($('<p>').text('Posted by: '))
             .append($postedBy);
-         //   .append($commentContainer);
+        //   .append($commentContainer);
 
         var $commentDeleteButton = $('<button class="commentDelete">').text('Delete');
         var $commentEditButton = $('<button class="commentEdit">').text('Edit');
@@ -41,14 +41,19 @@ app.commentView = (function () {
 
             $confirmButton.click(function () {
                 var newComment = $editInput.val();
-                _this._commentController.editComment(commentId, newComment)
-                    .then(function (data) {
-                        $('#' + commentId).find('p').first().text(newComment);
-                        $confirmButton.remove();
-                        $editInput.remove();
-                    }, function (err) {
-                        console.log(err.responseText);
-                    })
+                if (!newComment) {
+                    Noty.error('Please enter the new comment!');
+
+                } else {
+                    _this._commentController.editComment(commentId, newComment)
+                        .then(function (data) {
+                            $('#' + commentId).find('p').first().text(newComment);
+                            $confirmButton.remove();
+                            $editInput.remove();
+                        }, function (err) {
+                            console.log(err.responseText);
+                        })
+                }
             })
         });
 
