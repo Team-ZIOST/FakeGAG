@@ -7,9 +7,9 @@ var Noty = (function () {
             closeWith: ['click'],
             dismissQueue: true,
             layout: 'topCenter',
-            theme: 'Animated',
-            maxVisible: 10
-            // timeout: time
+            theme: 'bootstrapTheme',
+            maxVisible: 10,
+            timeout: time
         });
     }
 
