@@ -35,7 +35,7 @@ app.pictureController = (function () {
         var _this = this;
         this._model.showPicturesByCategory(category)
             .then(function (data) {
-                app.picturesView.load(data, $selector, _this._commentController);
+                app.picturesView.load(data, $selector, _this._commentController, _this);
             }, function (err) {
                 defer.reject(err);
             });
