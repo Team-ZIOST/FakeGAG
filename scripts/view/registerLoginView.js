@@ -17,6 +17,7 @@ app.registerLoginView = (function () {
                             location.replace('#/')
 
                         }, function (err) {
+                          //  console.log(JSON.stringify(err));
                             Noty.error(err.responseText);
                         });
                 });
@@ -26,25 +27,27 @@ app.registerLoginView = (function () {
                     var regPassWord = $('[name="password"]').val();
                     var regRepeatedPassword = $('[name="repeat-password"]').val();
                     var regEmail = $('[name="email"]').val();
-                    //todo validation, maybe code reuse
-                    ///todo include values in the function
-                    model.registerUser(regUsername, regEmail, regPassWord)
-                        .then(function (data) {
-                            Noty.success("Register successful, please login");
-                        }, function (error) {
-                            Noty.error(error.responseText);
-                        })
+                    if (regPassWord === regRepeatedPassword) {
+                        model.registerUser(regUsername, regEmail, regPassWord)
+                            .then(function (data) {
+                                Noty.success("Register successful, please login");
+                            }, function (error) {
+                                Noty.error(error.responseText);
+                            })
+                    } else {
+                        Noty.error('Passwords not match!')
+                    }
 
                 });
+
             });
     }
 
     function LogoutView($selector, model) {
         $($selector).empty();
-        //todo remove the logOutButton form here :)
         var $logOutButton = $('#loginLogOut');
         $logOutButton.click(function () {
-            //todo - this must be the controller!
+            if(sessionStorage['userId']){
             model.logoutUser()
                 .then(function () {
                     Noty.success("Good Bye!");
@@ -53,6 +56,7 @@ app.registerLoginView = (function () {
                 }, function (err) {
                     Noty.error(err.responseText)
                 });
+            }
         });
     }
 

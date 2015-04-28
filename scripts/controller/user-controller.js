@@ -25,12 +25,12 @@ app.userController = (function () {
             .then(function (data) {
                 console.log(data.objectId);
                 sessionStorage.loggedUserId = data.objectId;
-              return  _this._model.takeUserRole(data.objectId)
+                _this._model.takeUserRole(data.objectId)
                     .then(function (d) {
-                        defer.resolve(d);
-                    }, function (error) {
-                        defer.reject(error);
-                    });
+                    defer.resolve(d);
+                }, function (error) {
+                    defer.reject(error);
+                });
 
             }, function (error) {
                 defer.reject(error);

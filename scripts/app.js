@@ -33,14 +33,6 @@ var app = app || {};
 
         });
 
-        this.get('#/hot', function () {
-
-            app.setActiveLink('hot');
-            $($selector).empty();
-            //todo controller
-            console.log('hot');
-        });
-
         this.get('#/top-ten', function () {
             app.setActiveLink('top-ten');
             $($selector).empty();
