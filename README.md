@@ -42,15 +42,33 @@
 <h5>Photo Album</h5>
 <p><strong>Required</strong> functionalities:<p>
 <ul>
-<li><li>
-<li><li>
-<li><li>
-<li><li>
-<li><li>
+<li><strong>View</strong> all albums / categories (optionally with paging). Browse album photos.</li>
+<li><strong>Creating</strong> new album in a category.</li>
+<li><strong>Uploading</strong> photos (validating pictures size and type) / <strong>downloading</strong> photos.</li>
+<li>Adding <strong>comments</strong> to photos and albums.</li>
+<li>Implement album's <strong>ranking system</strong> (e.g. vote from 1 to 10 or like / dislike).</li>
+<li>Show the most <strong>highly ranked</strong> albums in a special section at the main page.</li>
 </ul>
-
+<p>Optional functionalities:</p>
 <ul>
-<li><li>
-<li><li>
-<li><li>
+<li>Implement <strong>user registration</strong>.</li>
+<li>Functionality for searching by album name / category.</li>
+<li>Admin panel (if registration is implemented): add / edit /delete albums, photos, comments.</li>
+</ul>
+<h4>Public Project Defense</h4>
+<p>Each team will have to deliver a public defense of its work in front of the other students, trainers and assistants. Teams will have only 10 minutes for the following:</p>
+<ul>
+<li><strong>Demonstrate</strong> the web application (very shortly).</li>
+<li>Show the <strong>source code</strong> and explain how it works.</li>
+<li>Explain how each team member has <strong>contributed</strong>: display the commit logs in the Source Control System you are using.</li>
+<li>Optionally you might prepare a presentation (3-4 slides).</li>
+</ul>
+<h5>Assessment Criteria</h5>
+<ul>
+<li><strong>Functionality</strong> (all the required functionalities according to the type of project you choose) – 0…7</li>
+<li>Correct use of <strong>AJAX</strong>, <strong>REST</strong> and <strong>JSON</strong> for accessing the server-side data – 0…3</li>
+<li><strong>Code quality</strong> (well-structured code, split into modules and files, good naming, formatting, etc.) – 0…5</li>
+<li><strong>Security</strong> (correct data validation, absence of cross-site scripting / unescaped data in the UI, etc.) – 0…2</li>
+<li><strong>Teamwork</strong> (GitHub used; each team member contributed in 5 different days; distribution of tasks) – 0…3</li>
+<li><strong>Bonus</strong> (bonus point are given for implementing optional functionalities according to the type of project you choose, using of patterns) – 0..5</li>
 </ul>
