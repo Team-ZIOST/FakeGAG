@@ -12,18 +12,18 @@ app.picturesView = (function () {
         data.forEach(function (pictureData) {
             var $image = $('<img class="image" src="' + pictureData._pictureURL + '">');
             var $postedBy = $('<p class="postedBy">').text('Posted by: ' + pictureData._ownerName);
-            var $download = $('<a href="' + pictureData._pictureURL + '" download>Download' + '</a>');
+            var $download = $('<a class="download" href="' + pictureData._pictureURL + '" download>Download' + '</a>');
             var $pictureTitle = $('<h1 class="pictureTitle">').text(pictureData._title);
             var $pictureDescription = $('<h2 class="pictureDescription">').text(pictureData._caption);
-            var $removeImageButton = $('<button class="removeButton">').text("Remove");
+            var $removeImageButton = $('<button class="removeButton btn btn-default btn-sm">').text("Remove");
             var $imageDivContainer = $('<div class="imageContainer">').attr('id', pictureData._objectId);
             var $commentTextArea = $('<textarea id="comment">').text('Comment...');
-            var $addCommentButton = $('<button id="add-comment">').text('Add Commment');
-            var $getCommentButton = $('<button id="get-comment">').text('Show Comments');
-            var $voteUpButton = $('<button>').text('+');
-            var $voteDownButton = $('<button>').text('-');
-            var $deleteCommentButton = $('<button>').text('Delete Comment');
-            var $voteCount = $('<span>');
+            var $addCommentButton = $('<button id="add-comment" class="btn btn-default btn-sm">').text('Add Commment');
+            var $getCommentButton = $('<button id="get-comment" class="btn btn-default btn-sm">').text('Show Comments');
+            var $voteUpButton = $('<button class="btn btn-default btn-sm">').text('+');
+            var $voteDownButton = $('<button class="btn btn-default btn-sm">').text('-');
+            var $deleteCommentButton = $('<button class="btn btn-default btn-sm">').text('Delete Comment');
+            var $voteCount = $('<span class="rating">');
 
             $voteCount.text('Rating: ' + pictureData._votes);
 

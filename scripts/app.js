@@ -23,6 +23,7 @@ var app = app || {};
         });
 
         this.get('#/upload', function () {
+            app.setActiveLink('upload');
             if (sessionStorage['userId']) {
                 pictureController.renderUploadPage($selector);
             } else {
