@@ -68,7 +68,7 @@ app.commentView = (function () {
             }
 
 
-            var $pictureContainer = $('#' + containerId);
+           // var $pictureContainer = $('#' + containerId);
             var $pictureContainer = $('#' + containerId);
             $commentContainer.append($commentDiv);
             $pictureContainer.append($commentContainer);
