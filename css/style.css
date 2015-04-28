@@ -193,6 +193,7 @@ i {
 }
 
 .imageContainer {
+    background-color: rgba(204, 204, 204, 0.25);
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     padding: 10px;
@@ -204,6 +205,7 @@ i {
     vertical-align: middle;
     box-sizing: border-box;
     text-align: center;
+    box-shadow: 0 25px 10px -15px rgba(0,0,0,0.05);
 }
 
 .imageContainer > button {
@@ -235,6 +237,10 @@ i {
 /*.download {*/
 
 /*}*/
+
+textarea {
+    resize: none;
+}
 
 #comment {
     width: 100%;

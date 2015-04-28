@@ -20,8 +20,8 @@ app.picturesView = (function () {
             var $commentTextArea = $('<textarea id="comment">').text('Comment...');
             var $addCommentButton = $('<button id="add-comment" class="btn btn-default btn-sm">').text('Add Commment');
             var $getCommentButton = $('<button id="get-comment" class="btn btn-default btn-sm">').text('Show Comments');
-            var $voteUpButton = $('<button class="btn btn-default btn-sm">').text('+');
-            var $voteDownButton = $('<button class="btn btn-default btn-sm">').text('-');
+            var $voteUpButton = $('<button class="btn btn-default btn-sm">').html('<i class="fa fa-thumbs-o-up"></i>');
+            var $voteDownButton = $('<button class="btn btn-default btn-sm">').html('<i class="fa fa-thumbs-o-down"></i>');
             var $deleteCommentButton = $('<button class="btn btn-default btn-sm">').text('Delete Comment');
             var $voteCount = $('<span class="rating">');
 
