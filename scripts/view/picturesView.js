@@ -12,8 +12,8 @@ app.picturesView = (function () {
             var $image = $('<img class="image" src="' + pictureData._pictureURL + '">');
             var $postedBy = $('<p class="postedBy">').text('Posted by: ' + pictureData._ownerName);
             var $download = $('<a class="download" href="' + pictureData._pictureURL + '" download>Download' + '</a>');
-            var $pictureTitle = $('<h1 class="pictureTitle">').text(pictureData._title);
-            var $pictureDescription = $('<h2 class="pictureDescription">').text(pictureData._caption);
+            var $pictureTitle = $('<h3 class="pictureTitle">').text(pictureData._title);
+            var $pictureDescription = $('<h3 class="pictureDescription">').text(pictureData._caption);
             var $removeImageButton = $('<button class="removeButton btn btn-default btn-sm">').text("Remove");
             var $imageDivContainer = $('<div class="imageContainer">').attr('id', pictureData._objectId);
             var $commentTextArea = $('<textarea id="comment">').attr('placeholder', 'Comment...');
