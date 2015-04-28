@@ -87,6 +87,7 @@ app.picturesView = (function () {
             });
 
             $getCommentButton.click(function () {
+
                 _this._commentController.getComments($(this).attr('data-id'))
                     .then(function (data) {
                         data.results.forEach(function (comment) {
