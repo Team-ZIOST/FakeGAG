@@ -8,8 +8,8 @@ app.commentView = (function () {
        // var $commentContainer = $('<div>');
         var _this = this;
 
-        var $commentDiv = $('<div>').attr('id', commentId);
-        var $commentText = $('<p>').text(commentContent);
+        var $commentDiv = $('<div class="bottomBorder">').attr('id', commentId);
+        var $commentText = $('<p class="commentContent">').text(commentContent);
         var $postedBy = $('<p>').text(authorName);
 
         this._commentController = commentController;
@@ -19,8 +19,8 @@ app.commentView = (function () {
             .append($postedBy);
         //   .append($commentContainer);
 
-        var $commentDeleteButton = $('<button class="commentDelete">').text('Delete');
-        var $commentEditButton = $('<button class="commentEdit">').text('Edit');
+        var $commentDeleteButton = $('<button class="commentDelete btn btn-default btn-sm">').text('Delete');
+        var $commentEditButton = $('<button class="commentEdit btn btn-default btn-sm">').text('Edit');
 
         $commentDeleteButton.click(function () {
             _this._commentController.deleteComment(commentId)
@@ -37,7 +37,7 @@ app.commentView = (function () {
                 var $editInput = $('<input  type="text">');
                 $editInput.attr('id', 'id' + containerId)
                 $commentDiv.append($editInput);
-                var $confirmButton = $('<button>').text('Confirm');
+                var $confirmButton = $('<button class="btn btn-default btn-sm">').text('Confirm');
                 $commentDiv.append($confirmButton);
             }
 

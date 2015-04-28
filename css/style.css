@@ -244,7 +244,7 @@ p {
 }
 
 .bottomBorder {
-    border-bottom: #ccc;
+    border-bottom: 1px solid #ccc;
 }
 
 .download {
