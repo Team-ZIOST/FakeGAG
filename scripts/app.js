@@ -28,6 +28,7 @@ var app = app || {};
                 pictureController.renderUploadPage($selector);
             } else {
                 userController.renderLogin($selector);
+                Noty.error('Please login first.');
             }
         });
 
@@ -59,6 +60,7 @@ var app = app || {};
                 userController.renderUpdateProfile($selector);
             } else {
                 userController.renderLogin($selector);
+                Noty.error('Please login first.');
             }
         });
     });
