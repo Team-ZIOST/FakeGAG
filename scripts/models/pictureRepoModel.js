@@ -14,9 +14,7 @@ app.pictureRepoModel = (function () {
 
         this._requester.getPictures()
             .then(function (data) {
-                //console.log(data);
                 data.results.forEach(function (pictureData) {
-                    //console.log(pictureData)
                     var title = pictureData.title,
                         caption = pictureData.caption,
                         pictureUrl = pictureData.picture.url,
@@ -27,9 +25,7 @@ app.pictureRepoModel = (function () {
                         voters = pictureData.voters ? pictureData.voters : [],
                         ownerName = pictureData.ownerName,
                         picture = new Picture(objectId, title, caption, pictureUrl, votes, voters, category, owner, ownerName);
-                    //console.log(picture)
-                    //pointer owner
-                    //todo this fields
+
                     _this.pictureRepo.push(picture);
                 });
 
@@ -49,9 +45,7 @@ app.pictureRepoModel = (function () {
 
         this._requester.getTopTenPictures()
             .then(function (data) {
-                //console.log(data);
                 data.results.forEach(function (pictureData) {
-                    //console.log(pictureData)
                     var title = pictureData.title,
                         caption = pictureData.caption,
                         pictureUrl = pictureData.picture.url,

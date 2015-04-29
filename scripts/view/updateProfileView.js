@@ -10,18 +10,18 @@ app.updateProfileView = (function () {
             $selector.html(output);
 
             $('#updateButton').click(function () {
-                var username = $('#email').val();
-                var password = $('#password').val();
-                var repeatPassword = $('#confirm-password').val();
-                if(password === repeatPassword){
-                controller.updateProfile(username, password)
-                    .then(function () {
-                        Noty.success('Updated Profile!');
-                    }, function (err) {
-                        console.log(err.responseText);
-                        Noty.error(err.responseText)
-                    });
-                }else{
+                var username = $('#email').val(),
+                    password = $('#password').val(),
+                    repeatPassword = $('#confirm-password').val();
+
+                if (password === repeatPassword) {
+                    controller.updateProfile(username, password)
+                        .then(function () {
+                            Noty.success('Updated Profile!');
+                        }, function (err) {
+                            Noty.error(err.responseJSON.error);
+                        });
+                } else {
                     Noty.error('New passwords not match!');
                 }
             });

@@ -1,22 +1,20 @@
 var app = app || {};
 
 (function () {
-
     app.router = Sammy(function () {
-
         if (sessionStorage['userId']) {
-            $('#loginLogOut').html('<a href="#/signup-login"><i class="pe-7s-key"></i><span class="menuspan" id="login-register">Log out</span></a>')
+            $('#loginLogOut')
+                .html('<a href="#/signup-login"><i class="pe-7s-key"></i><span class="menuspan" id="login-register">Log out</span></a>');
         }
 
-        var $selector = $('#wrapper');
-        var pictureRepoModel = app.pictureRepoModel.load(app.constants.BASE_URL);
-        var pictureRequester = app.pictureRequster.load(app.constants.BASE_URL);
-        var userModel = app.userModel.load();
-        var commentModel = app.commentModel.load(app.constants.BASE_URL);
-        var commentController = app.commentController.load(commentModel);
-        var pictureController = app.pictureController.load(pictureRepoModel, commentController, pictureRequester);
-        var userController = app.userController.load(userModel);
-        //end invoking controllers
+        var $selector = $('#wrapper'),
+            pictureRepoModel = app.pictureRepoModel.load(app.constants.BASE_URL),
+            pictureRequester = app.pictureRequster.load(app.constants.BASE_URL),
+            userModel = app.userModel.load(),
+            commentModel = app.commentModel.load(app.constants.BASE_URL),
+            commentController = app.commentController.load(commentModel),
+            pictureController = app.pictureController.load(pictureRepoModel, commentController, pictureRequester),
+            userController = app.userController.load(userModel);
 
         this.get('#/', function () {
             app.setActiveLink('');
@@ -25,12 +23,12 @@ var app = app || {};
 
         this.get('#/upload', function () {
             app.setActiveLink('upload');
+
             if (sessionStorage['userId']) {
                 pictureController.renderUploadPage($selector);
             } else {
                 userController.renderLogin($selector);
             }
-
         });
 
         this.get('#/top-ten', function () {
@@ -46,6 +44,7 @@ var app = app || {};
 
         this.get('#/signup-login', function () {
             app.setActiveLink('signup-login');
+
             if (sessionStorage['userId']) {
                 userController.renderLogout($selector);
             } else {
