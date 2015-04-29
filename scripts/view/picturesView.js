@@ -83,6 +83,8 @@ app.picturesView = (function () {
             });
 
             $addCommentButton.click(function () {
+                var $commentsContainer,
+                    containerId;
                 var commentContent = $commentTextArea.val();
 
                 if (!commentContent) {
@@ -97,8 +99,9 @@ app.picturesView = (function () {
                                 authorId = sessionStorage['userId'];
 
                             app.commentView.renderComments(commentId, commentContent,
-                                authorName, id, _this._commentController, authorId);
-                            $commentTextArea.val('')
+                                authorName, containerId, _this._commentController, authorId);
+                            $commentTextArea.val('');
+                            Noty.success('Comment added!');
                         }, function (err) {
                             console.error(err.responseText);
                         });
