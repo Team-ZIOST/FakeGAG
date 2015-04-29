@@ -98,6 +98,7 @@ app.picturesView = (function () {
 
                             app.commentView.renderComments(commentId, commentContent,
                                 authorName, id, _this._commentController, authorId);
+                            $commentTextArea.val('')
                         }, function (err) {
                             console.error(err.responseText);
                         });
