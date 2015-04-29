@@ -101,7 +101,7 @@ app.pictureRequster = (function () {
                     category: {
                         "__type": "Pointer",
                         "className": "Category",
-                        name: category
+                        objectId: category
                     },
                     ownerName: sessionStorage['username'],
                     picture: {

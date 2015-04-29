@@ -16,12 +16,12 @@ app.uploadView = (function () {
                 var file = $('#file')[0].files[0],
                     title = $('#title').val(),
                     caption = $('#caption').val(),
-                    category = $("#category option:selected").text();
+                    category = $("#category option:selected").val();
 
                 if (title && caption && file) {
                     if (app.constants.SUPPORTED_FORMATS.indexOf(file.type) !== -1) {
                         _this._model.uploadPicture(file, title, caption, category)
-                            .then(function (data) {
+                            .then(function () {
                                 Noty.success('Upload complete!');
                                 location.replace('#/');
                             }, function (err) {
