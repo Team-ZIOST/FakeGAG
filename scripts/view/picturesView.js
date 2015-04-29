@@ -46,6 +46,8 @@ app.picturesView = (function () {
                         .then(function () {
                             $voteCount.text('Rating: ' + pictureData._votes);
                         });
+                } else {
+                    Noty.error('You have already voted for this photo.');
                 }
             });
 
@@ -57,6 +59,8 @@ app.picturesView = (function () {
                         .then(function () {
                             $voteCount.text('Rating: ' + pictureData._votes);
                         });
+                } else {
+                    Noty.error('You have already voted for this photo.');
                 }
             });
 
@@ -69,7 +73,7 @@ app.picturesView = (function () {
                 var id = $(this).parent().attr('id');
 
                 _this._pictureController.deletePicture(id)
-                    .then(function (data) {
+                    .then(function () {
                         $("#" + id).remove();
                     }, function (error) {
                         console.log(error.responseText)
