@@ -272,8 +272,12 @@ textarea {
 
 @media all and (max-width: 1200px) {
     #navbar .container {
-        width: 600px;
+        width: 600px; 
     }
+	.imageContainer {
+		margin: 15px auto;
+		display: block;
+	}
 }
 
 @media all and (max-width: 770px) {
