@@ -58,6 +58,7 @@ app.picturesView = (function () {
                     _this._pictureController.updatePicture(sessionStorage.loggedUserId, pictureData._objectId, --pictureData._votes)
                         .then(function () {
                             $voteCount.text('Rating: ' + pictureData._votes);
+                            Noty.success('You successfully voted for this photo!')
                         });
                 } else {
                     Noty.error('You have already voted for this photo.');
