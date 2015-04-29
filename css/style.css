@@ -252,8 +252,13 @@ textarea {
     position: relative;
     overflow: hidden;
     width: 222px;
-    margin-left: 142px;
+    /*margin-left: 142px;*/
 }
+
+#center {
+    text-align: center;
+}
+
 .fileUpload input.upload {
     position: absolute;
     top: 0;
